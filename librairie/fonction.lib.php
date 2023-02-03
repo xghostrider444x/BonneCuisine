@@ -128,6 +128,8 @@ function calculerSommePanier($conn,$panier){
     $requete = "SELECT sum(quantite) as nbPersonne from panier,menu_fr where panier.noProduit = menu_fr.idMenu and idPanier = '$panier'";
     
     foreach($conn->query($requete) as $row){
+        $taxe = 14.85;
+        $total = $row['nbPersonne'] * $taxe;
         echo "Le total de votre panier est de : ".$row['nbPersonne']."";
     }
     
