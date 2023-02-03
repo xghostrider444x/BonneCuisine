@@ -126,14 +126,10 @@ function afficherMenu($conn){
 
 function calculerSommePanier($conn,$panier){
     $requete = "SELECT sum(quantite) as nbPersonne from panier,menu_fr where panier.noProduit = menu_fr.idMenu and idPanier = '$panier'";
-    $resultat = $conn->query($requete);
-    $resultat->setFetchMode(PDO::FETCH_OBJ);
-    $nbPersonne = $resultat['nbPersonne'];
-
     
-
-
-    echo $resultat;
+    foreach($conn->query($requete) as $row){
+        echo "Le total de votre panier est de : ".$row['nbPersonne']."";
+    }
     
 
 }

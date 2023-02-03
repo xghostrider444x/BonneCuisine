@@ -47,7 +47,7 @@
  echo 
  "
  <br><div class='container'>
-    <a href='panier.php?action=modifier' id='updatePanier'><imgMettre a jour la commande</a>
+    <a href='panier.php?action=modifier' id='updatePanier'>Mettre a jour la commande</a>
  </div>";
 
  
