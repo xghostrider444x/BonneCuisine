@@ -12,7 +12,6 @@
     ?>
 </div>
 
-
 <?php
 include("include/foot.inc.php");
 ?>
