@@ -32,7 +32,10 @@ function supprimerItemPanier($conn,$idProduit,$panier){
     $result = $conn->exec($requete);
 }
 
-
+function updatePanier($conn,$quantite,$id,$panier){
+    $requete = "UPDATE Panier set quantite = $quantite where idPanier = '$panier' and noProduit = $id";
+    $resultat = $conn->exec($requete);
+}
 //---------------------------------------------------------------------------------------------------------------------------//
 
 // ------- Cette section contient les fonction qui effectue des vérification sur des éléments des tables. ------ //à
@@ -66,25 +69,26 @@ function verifItemPanier($conn,$panier){
 function afficherElementPanier($conn,$requete,$panier){
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
-    echo "<form action='post'>";
+    echo "<form method='post' action='panier.php?action=modifier'>";
     while($ligne = $resultat->fetch())
         { 
             if($ligne->idPanier == $panier){
+                $idMenu = $ligne->idMenu;
                 echo "
             <div>
             <br>
                 <div class='container' id='menu'>
                     <div class='col'>
                     <p><b>Menu :</b>".$ligne->nom."</p>
-                    <p>Nombre de personnes : <input name='quantite".$ligne->idMenu."' id='amount".$ligne->idMenu."' type='number' min='0' value='".$ligne->quantite."'/></p>      
-                    <a href='panier.php?action=suprimer&id=".$ligne->idMenu."'>Suprimer ce menu</a>
+                    <p>Nombre de personnes : <input name='quantite$idMenu' id='amount$idMenu' type='number' min='0' value='".$ligne->quantite."'/></p>      
+                    <a href='panier.php?action=suprimer&id=$idMenu'>Suprimer ce menu</a>
                     </div>
                 </div>
             </div>";
             }
             
         }
-    echo "</form>";
+    
 }
 
 // Cette fonction affiche un message si aucune commande n'est dans le panier.

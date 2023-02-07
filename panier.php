@@ -31,6 +31,25 @@
             supprimerItemPanier($conn,$idProduit,$panier);
         }
     }
+    if(isset($_GET["action"])){
+        if($_GET["action"] == "modifier"){
+            for( $i = 1; $i < 6; $i++){
+            if(!empty($_POST["quantite$i"])){
+                if($_POST["quantite$i"] < 1){
+                    echo "suprimer";
+                    supprimerItemPanier($conn,$i,$panier);
+                }
+                else{
+                   updatePanier($conn,$_POST["quantite$i"],$i,$panier); 
+                }
+
+                 
+            }
+            
+        }
+        }
+        
+    }
 
     if(verifItemPanier($conn,$panier)){
         echo "<h1>Votre Panier</h1>";
@@ -43,12 +62,16 @@
     }
 ?>
  
- <?php 
- echo 
+ <?php
+ if(verifItemPanier($conn,$panier)){
+    echo 
  "
  <br><div class='container'>
-    <a href='panier.php?action=modifier' id='updatePanier'>Mettre a jour la commande</a>
- </div>";
+    <input type='submit' value='mettre à jour la commande'/>
+ </div>
+ </form>";
+ };
+ 
 
  
  
