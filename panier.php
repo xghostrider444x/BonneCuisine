@@ -12,6 +12,7 @@
          setcookie("panier", $panier, time()+3*60*60); 
     }
 
+
     if(isset($_GET["id"])){
         if($_GET["action"] == "ajouter"){
             $idProduit = $_GET["id"];
@@ -41,12 +42,15 @@
         }
         }
         if($_GET["action"] == "envoyer"){
-
+            
         }
     }
 
     if(verifItemPanier($conn,$panier)){
-        echo "<h1 class='text-center'>Votre Panier</h1>";
+        echo "
+        
+        <form ></form>
+        <h1 class='text-center'>Votre Panier</h1>";
         afficherElementPanier($conn,$panier);
     }
     else{
@@ -58,18 +62,21 @@
  if(verifItemPanier($conn,$panier)){
     echo 
  "
- <br><div class='container'>
-    <div>
-        <input type='submit' value='mettre à jour la commande'/>
-    </div>
- </div>
-</form>";
+    <form method='post' action='panier.php?action=modifier'>
+        <br><div class='container'>
+        <div>
+            <input type='submit' value='mettre à jour la commande'/>
+        </div>
+        <div>
+            <input type='checkbox'> <label> 15$ Livraison</label>
+        </div>
+    </form>";
 calculerSommePanier($conn,$panier);
 echo "
-<form method='post' action='sendEmail.php?action='envoyer''></form>
+
  <div class='container text-center' id='menu'>
     <p>Merci de magasiner sur notre site. Il ne vous reste qu'a appuiyer sur le bouton pour confirmer la commande.</p>
-    <input type='submit' value='envoyer la commande'>
+    <input type='submit' value='envoyer la commande' onclick=''>
  </div>
 
  ";

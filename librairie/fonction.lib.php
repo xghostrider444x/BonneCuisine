@@ -151,5 +151,8 @@ function calculerSommePanier($conn,$panier){
     
 
 }
+function afficherElementPourCourriel(){
+    
+}
 
 ?>
