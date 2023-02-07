@@ -33,9 +33,15 @@ function supprimerItemPanier($conn,$idProduit,$panier){
 }
 
 function updatePanier($conn,$quantite,$id,$panier){
-    $requete = "UPDATE Panier set quantite = $quantite where idPanier = '$panier' and noProduit = $id";
-    $resultat = $conn->exec($requete);
-}
+    if($quantite == null){
+        supprimerItemPanier($conn,$id,$panier);
+    }
+    else{
+        $requete = "UPDATE Panier set quantite = $quantite where idPanier = '$panier' and noProduit = $id";
+        $resultat = $conn->exec($requete);
+    }
+    }
+    
 //---------------------------------------------------------------------------------------------------------------------------//
 
 // ------- Cette section contient les fonction qui effectue des vérification sur des éléments des tables. ------ //à
@@ -66,7 +72,8 @@ function verifItemPanier($conn,$panier){
 }
 
 // ------ Cette section comporte les fonctions qui font de l'affichage a l'écran ------- //
-function afficherElementPanier($conn,$requete,$panier){
+function afficherElementPanier($conn,$panier){
+    $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit;";
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
     echo "<form method='post' action='panier.php?action=modifier'>";
@@ -80,7 +87,7 @@ function afficherElementPanier($conn,$requete,$panier){
                 <div class='container' id='menu'>
                     <div class='col'>
                     <p><b>Menu :</b>".$ligne->nom."</p>
-                    <p>Nombre de personnes : <input name='quantite$idMenu' id='amount$idMenu' type='number' min='0' value='".$ligne->quantite."'/></p>      
+                    <p>Nombre de personnes : <input name='quantite$idMenu' id='amount$idMenu' type='number' value='".$ligne->quantite."'/></p>      
                     <a href='panier.php?action=suprimer&id=$idMenu'>Suprimer ce menu</a>
                     </div>
                 </div>
@@ -137,11 +144,12 @@ function calculerSommePanier($conn,$panier){
         $taxe = 14.85;
         $total = $row['nbPersonne'] * $taxe;
         echo "
-        <div class='container prixPanier' >
+        <div class='container prixPanier' id='menu' >
             <h3>Le total de votre panier est de : ".$total." $</h3>
         </div>";
     }
     
 
 }
+
 ?>

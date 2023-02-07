@@ -31,31 +31,23 @@
             supprimerItemPanier($conn,$idProduit,$panier);
         }
     }
+
     if(isset($_GET["action"])){
         if($_GET["action"] == "modifier"){
             for( $i = 1; $i < 6; $i++){
-            if(!empty($_POST["quantite$i"])){
-                if($_POST["quantite$i"] < 1){
-                    echo "suprimer";
-                    supprimerItemPanier($conn,$i,$panier);
-                }
-                else{
-                   updatePanier($conn,$_POST["quantite$i"],$i,$panier); 
-                }
-
-                 
+            if(!empty($_POST["quantite$i"])){       
+                   updatePanier($conn,$_POST["quantite$i"],$i,$panier);       
             }
-            
         }
         }
-        
+        if($_GET["action"] == "envoyer"){
+
+        }
     }
 
     if(verifItemPanier($conn,$panier)){
         echo "<h1 class='text-center'>Votre Panier</h1>";
-        $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit;";
-        afficherElementPanier($conn,$requete,$panier);
-        echo calculerSommePanier($conn,$panier);
+        afficherElementPanier($conn,$panier);
     }
     else{
         afficherMessageAucuneCommande();
@@ -66,21 +58,22 @@
  if(verifItemPanier($conn,$panier)){
     echo 
  "
- <br><div class='container text-center '>
+ <br><div class='container'>
     <div>
         <input type='submit' value='mettre à jour la commande'/>
     </div>
-    
  </div>
- </form>";
- };
- 
+</form>";
+calculerSommePanier($conn,$panier);
+echo "
+<form method='post' action='sendEmail.php?action='envoyer''></form>
+ <div class='container text-center' id='menu'>
+    <p>Merci de magasiner sur notre site. Il ne vous reste qu'a appuiyer sur le bouton pour confirmer la commande.</p>
+    <input type='submit' value='envoyer la commande'>
+ </div>
 
- 
- 
- 
- 
- 
+ ";
+ };
  ?>
 <?php
 include("include/foot.inc.php");
