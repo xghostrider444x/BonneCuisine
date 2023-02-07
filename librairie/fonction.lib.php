@@ -66,6 +66,7 @@ function verifItemPanier($conn,$panier){
 function afficherElementPanier($conn,$requete,$panier){
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
+    echo "<form action='post'>";
     while($ligne = $resultat->fetch())
         { 
             if($ligne->idPanier == $panier){
@@ -75,7 +76,7 @@ function afficherElementPanier($conn,$requete,$panier){
                 <div class='container' id='menu'>
                     <div class='col'>
                     <p><b>Menu :</b>".$ligne->nom."</p>
-                    <p>Nombre de personnes : <input id='amount".$ligne->idMenu."' type='number' min='0' value='".$ligne->quantite."'/></p>      
+                    <p>Nombre de personnes : <input name='quantite".$ligne->idMenu."' id='amount".$ligne->idMenu."' type='number' min='0' value='".$ligne->quantite."'/></p>      
                     <a href='panier.php?action=suprimer&id=".$ligne->idMenu."'>Suprimer ce menu</a>
                     </div>
                 </div>
@@ -83,6 +84,7 @@ function afficherElementPanier($conn,$requete,$panier){
             }
             
         }
+    echo "</form>";
 }
 
 // Cette fonction affiche un message si aucune commande n'est dans le panier.
@@ -130,7 +132,7 @@ function calculerSommePanier($conn,$panier){
     foreach($conn->query($requete) as $row){
         $taxe = 14.85;
         $total = $row['nbPersonne'] * $taxe;
-        echo "Le total de votre panier est de : ".$row['nbPersonne']."";
+        echo "Le total de votre panier est de : ".$total." $";
     }
     
 
