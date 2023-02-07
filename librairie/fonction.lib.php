@@ -136,7 +136,10 @@ function calculerSommePanier($conn,$panier){
     foreach($conn->query($requete) as $row){
         $taxe = 14.85;
         $total = $row['nbPersonne'] * $taxe;
-        echo "Le total de votre panier est de : ".$total." $";
+        echo "
+        <div class='container prixPanier' >
+            <h3>Le total de votre panier est de : ".$total." $</h3>
+        </div>";
     }
     
 

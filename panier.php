@@ -52,7 +52,7 @@
     }
 
     if(verifItemPanier($conn,$panier)){
-        echo "<h1>Votre Panier</h1>";
+        echo "<h1 class='text-center'>Votre Panier</h1>";
         $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit;";
         afficherElementPanier($conn,$requete,$panier);
         echo calculerSommePanier($conn,$panier);
@@ -66,8 +66,11 @@
  if(verifItemPanier($conn,$panier)){
     echo 
  "
- <br><div class='container'>
-    <input type='submit' value='mettre à jour la commande'/>
+ <br><div class='container text-center '>
+    <div>
+        <input type='submit' value='mettre à jour la commande'/>
+    </div>
+    
  </div>
  </form>";
  };
