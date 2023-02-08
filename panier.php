@@ -48,8 +48,6 @@
 
     if(verifItemPanier($conn,$panier)){
         echo "
-        
-        <form ></form>
         <h1 class='text-center'>Votre Panier</h1>";
         afficherElementPanier($conn,$panier);
     }
@@ -74,10 +72,12 @@
 calculerSommePanier($conn,$panier);
 echo "
 
+ 
  <div class='container text-center' id='menu'>
     <p>Merci de magasiner sur notre site. Il ne vous reste qu'a appuiyer sur le bouton pour confirmer la commande.</p>
-    <input type='submit' value='envoyer la commande' onclick=''>
+    <input type='submit' value='envoyer la commande' onclick='getEmail'>
  </div>
+
 
  ";
  };
