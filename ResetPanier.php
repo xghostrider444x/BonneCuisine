@@ -1,5 +1,6 @@
 <?php 
  $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+
  $deleteRequest = "DROP table panier";
 
  $result = $conn->exec($deleteRequest);
@@ -12,5 +13,5 @@
     PRIMARY KEY (idPanier,noProduit)
 );";
 
- $result = $conn->exec($createRequest);
+ $resultCreate = $conn->exec($createRequest);
 ?>

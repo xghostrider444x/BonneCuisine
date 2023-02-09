@@ -57,20 +57,23 @@
 ?>
  
  <?php
+ 
  if(verifItemPanier($conn,$panier)){
+    $checked = (isset($_REQUEST['chk'])) ? 'checked' : '';
     echo 
  "
-    <form method='post' action='panier.php?action=modifier'>
+    <form name='panier' method='post' action='panier.php?action=modifier'>
         <br><div class='container'>
         <div>
             <input type='submit' value='mettre à jour la commande'/>
         </div>
         <div>
-            <input name='livraison' type='checkbox'> <label> 15$ Livraison</label>
+            <input type='checkbox' id='chk' ".$checked."> <label> 15$ Livraison</label>
         </div>
     </form>";
+    
 
-$prixTotal = calculerSommePanier($conn,$panier);
+$prixTotal = calculerSommePanier($conn,$panier,$checked);
 
 echo "
         <div class='container prixPanier' id='menu' >
@@ -88,6 +91,7 @@ echo "
  ";
  };
  ?>
+ 
 <?php
 include("include/foot.inc.php");
 ?>

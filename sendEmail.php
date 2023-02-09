@@ -24,8 +24,8 @@ if (isset($_GET["action"])){
     }
 }
 $mail = $_GET["courriel"];
-
-$prixTotal = calculerSommePanier($conn,$panier);
+$checked = $_GET["livraison"];
+$prixTotal = calculerSommePanier($conn,$panier,$checked);
 $objet = iconv('utf-8','ISO-8859-1',"Reçu de commande");
 
 $texte = "Bonjour, \r\nNous vous remercion d'avoir commandé via notre service de traiteur Bonne Cuisine.\r\nVoici la description de votre commande :\r\n\n";
@@ -47,6 +47,7 @@ if(mail($mail,$objet,$texte,$entete)){
     <a href=index.php>Retourner à la page principale</a>
     </div>
     ";
+    deletePanier($conn,$panier);
 }
 
 include("include/foot.inc.php");

@@ -40,7 +40,13 @@ function updatePanier($conn,$quantite,$id,$panier){
         $requete = "UPDATE Panier set quantite = $quantite where idPanier = '$panier' and noProduit = $id";
         $resultat = $conn->exec($requete);
     }
-    }
+}
+
+function deletePanier($conn,$panier){
+    $requete = "DELETE from panier where idPanier = '$panier'";
+    $result = $conn->exec($requete);
+
+}
     
 //---------------------------------------------------------------------------------------------------------------------------//
 
@@ -73,6 +79,7 @@ function verifItemPanier($conn,$panier){
 
 // ------ Cette section comporte les fonctions qui font de l'affichage a l'écran ------- //
 function afficherElementPanier($conn,$panier){
+    
     $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit;";
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
@@ -137,16 +144,26 @@ function afficherMenu($conn){
         $resultat->closeCursor( );
 }
 
-function calculerSommePanier($conn,$panier){
+function calculerSommePanier($conn,$panier,$cheked){
     $requete = "SELECT noProduit, quantite, prix  from panier,menu_fr where panier.noProduit = menu_fr.idMenu and idPanier = '$panier' order by noProduit ";
     $total = 0;
+   
     foreach($conn->query($requete) as $row){
         $taxe = 1.1485;
-        $totalParProduit = ($row['quantite'] * $row['prix'] ) * $taxe;
+        if($row['quantite'] < 10){
+            $surplus = $row['quantite'] * 1;
+            $totalParProduit = ($row['quantite'] * $row['prix'] + $surplus ) * $taxe;
+        }
+        else{
+            $totalParProduit = ($row['quantite'] * $row['prix']) * $taxe;
+        }
+        
+        
         $total = $total + $totalParProduit;
     }
-    
-
+    if($cheked){
+            $total = $total+15;
+    }
     return $total;
 
 }
