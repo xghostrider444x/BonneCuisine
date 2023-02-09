@@ -66,18 +66,19 @@
             <input type='submit' value='mettre à jour la commande'/>
         </div>
         <div>
-            <input type='checkbox'> <label> 15$ Livraison</label>
+            <input name='livraison' type='checkbox'> <label> 15$ Livraison</label>
         </div>
     </form>";
-calculerSommePanier($conn,$panier);
+
+$prixTotal = calculerSommePanier($conn,$panier);
 echo "
 
- 
+ <form name='confirmation' method='post' >
  <div class='container text-center' id='menu'>
     <p>Merci de magasiner sur notre site. Il ne vous reste qu'a appuiyer sur le bouton pour confirmer la commande.</p>
-    <input type='submit' value='envoyer la commande' onclick='getEmail'>
+    <input type='submit' value='envoyer la commande' onclick=getEmail()></input>
  </div>
-
+</form>
 
  ";
  };
