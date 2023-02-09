@@ -27,32 +27,26 @@ $mail = "202130878@collegealma.ca";
 
 $prixTotal = calculerSommePanier($conn,$panier);
 $objet = "Reçu de commande";
-$texte= "
-<p>Bonjour</p>
-<br><br>
-<p>Nous vous remercion d'avoir commandé via notre service de traiteur Bonne Cuisine.</p>
-<br>
-<p>Voici la description de votre commande</p>
-<div>
-<br><br>
 
+$texte = "Bonjour, \r\nNous vous remercion d'avoir commandé via notre service de traiteur Bonne Cuisine.\r\nVoici la description de votre commande :\r\n\n";
+$texte .= afficherElementPourCourriel($conn,$panier);
+$texte .= "\r\n\nLe prix total de votre commande est de : $prixTotal $\r\n";
 
-<p>Le prix total de votre commande est de : ".$prixTotal."$</p>
-</div>
-<div>
-<p>Un de nos employer va entrer en contact avec vous d'ici peut.</p>
-</div>
-";
+$texte .= "Un de nos employer va entrer en contact avec vous d'ici peut.";
 
+$texte = wordwrap($texte, 70, "\r\n",true);
 
 if(mail($mail,$objet,$texte,$entete)){
-    echo "$prenom le couriel est bien transmis";
+    echo 
+    "<h1 class='text-center'>Merci de votre achat</h1>
+    <br><br>
+    <div class='pinkie text-center'>
+    <p>Votre commande a été passé avec succès</p>
+    <p>Retourner a la page principale</p>
+    <a href=index.php>Retourner à la page principale</a>
+    </div>
+    ";
 }
-
-
-
-
-
 
 include("include/foot.inc.php");
 
