@@ -159,7 +159,7 @@ function afficherElementPourCourriel($conn,$panier){
     while($ligne = $resultat->fetch())
         { 
             if($ligne->idPanier == $panier){
-             $texte = "Menu : $ligne->nom  \r\n Nombre de personnes : $ligne->quantite \n";
+             $texte = "Menu : $ligne->nom  \r\n Nombre de personnes : $ligne->quantite \r\n\n\n";
                 $texteFinal = "$texteFinal  $texte";
             } 
         }
