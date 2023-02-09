@@ -138,21 +138,33 @@ function afficherMenu($conn){
 }
 
 function calculerSommePanier($conn,$panier){
-    $requete = "SELECT sum(quantite) as nbPersonne from panier,menu_fr where panier.noProduit = menu_fr.idMenu and idPanier = '$panier'";
-    
+    $requete = "SELECT noProduit, quantite, prix  from panier,menu_fr where panier.noProduit = menu_fr.idMenu and idPanier = '$panier' order by noProduit ";
+    $total = 0;
     foreach($conn->query($requete) as $row){
-        $taxe = 14.85;
-        $total = $row['nbPersonne'] * $taxe;
-        echo "
-        <div class='container prixPanier' id='menu' >
-            <h3>Le total de votre panier est de : ".$total." $</h3>
-        </div>";
+        $taxe = 1.1485;
+        $totalParProduit = ($row['quantite'] * $row['prix'] ) * $taxe;
+        $total = $total + $totalParProduit;
     }
     
 
+    return $total;
+
 }
-function afficherElementPourCourriel(){
-    
+
+function afficherElementPourCourriel($conn,$panier){
+    $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit;";
+    $resultat = $conn->query($requete);
+    $resultat->setFetchMode(PDO::FETCH_OBJ);
+    $texteFinal = "";
+    while($ligne = $resultat->fetch())
+        { 
+            if($ligne->idPanier == $panier){
+             $texte = "Menu : $ligne->nom  \r\n Nombre de personnes : $ligne->quantite \n";
+                $texteFinal = "$texteFinal  $texte";
+            } 
+        }
+        return $texteFinal;
 }
+
 
 ?>
