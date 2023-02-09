@@ -19,11 +19,11 @@ else{
 if (isset($_GET["action"])){
     if($_GET["action"] == "envoyer"){
      if($_GET["courriel"] != null){
-        $entete = "from:".$_GET["courriel"]."";
+        $entete = "from:SugarCubeCorner@gmail.com";
      }
     }
 }
-$mail = "202130878@collegealma.ca";
+$mail = $_GET["courriel"];
 
 $prixTotal = calculerSommePanier($conn,$panier);
 $objet = "Reçu de commande";
