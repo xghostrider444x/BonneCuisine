@@ -152,7 +152,7 @@ function calculerSommePanier($conn,$panier){
 }
 
 function afficherElementPourCourriel($conn,$panier){
-    $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit;";
+    $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit and idPanier = '$panier';";
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
     $texteFinal = "";
