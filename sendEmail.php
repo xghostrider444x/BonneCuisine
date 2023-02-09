@@ -26,7 +26,7 @@ if (isset($_GET["action"])){
 $mail = $_GET["courriel"];
 
 $prixTotal = calculerSommePanier($conn,$panier);
-$objet = "Reçu de commande";
+$objet = iconv('utf-8','ISO-8859-1',"Reçu de commande");
 
 $texte = "Bonjour, \r\nNous vous remercion d'avoir commandé via notre service de traiteur Bonne Cuisine.\r\nVoici la description de votre commande :\r\n\n";
 $texte .= afficherElementPourCourriel($conn,$panier);
@@ -34,6 +34,7 @@ $texte .= "\r\n\nLe prix total de votre commande est de : $prixTotal $\r\n";
 
 $texte .= "Un de nos employer va entrer en contact avec vous d'ici peut.";
 
+$texte = iconv('utf-8','ISO-8859-1', $texte);
 $texte = wordwrap($texte, 70, "\r\n",true);
 
 if(mail($mail,$objet,$texte,$entete)){
