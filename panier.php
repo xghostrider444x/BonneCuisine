@@ -71,6 +71,7 @@
     </form>";
 
 $prixTotal = calculerSommePanier($conn,$panier);
+
 echo "
         <div class='container prixPanier' id='menu' >
             <h3>Le total de votre panier est de : ".$prixTotal." $</h3>
