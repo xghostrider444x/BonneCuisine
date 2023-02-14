@@ -4,6 +4,29 @@ function connection($bd){
     $bd = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
     return $bd;
 }
+
+function verifUsager($conn,$couriel,$mp){
+    $valide = true;
+    $nbRow = 0;
+
+    $requete = $conn->prepare("SELECT * from usager where courriel=:couriel");
+    $requete->execute(array('courriel'=>$couriel));
+    $nbRow = $requete->rowCount();
+
+    if($nbRow == 0){
+        $valide = false;
+    }
+    else{
+        $ligne = $requete->fetch();
+        if(password_verify($mp,$ligne['motPasse'])){
+            $valide = true;
+        }
+        else{
+            $valide = false;
+        }
+    }
+    return $valide;
+}
 //---------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -155,6 +178,7 @@ function afficherMenu($conn){
         $resultat->closeCursor( );
 }
 
+//Cette fonction calcule le prix total de tout les élément contenu dans le panier + la livraison si coché.
 function calculerSommePanier($conn,$panier,$cheked){
     $requete = "SELECT noProduit, quantite, prix  from panier,menu_fr where panier.noProduit = menu_fr.idMenu and idPanier = '$panier' order by noProduit ";
     $total = 0;
@@ -179,6 +203,7 @@ function calculerSommePanier($conn,$panier,$cheked){
 
 }
 
+// Cette fonction affiche les éléments contenu dans le panier dans l'email envoyer au client.
 function afficherElementPourCourriel($conn,$panier){
     $requete = "SELECT * from menu_fr,panier where menu_fr.idMenu = panier.noProduit and idPanier = '$panier';";
     $resultat = $conn->query($requete);
