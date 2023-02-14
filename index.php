@@ -1,5 +1,11 @@
 <?php
-    include("include/head.inc.php")
+    if(isset($_SESSION["usager"])){
+        include("include/headAdmin.inc.php");
+    }
+    else{
+       include("include/head.inc.php");
+    }
+    
 ?>
 <div class="container">
     <br>
