@@ -4,16 +4,12 @@ include("librairie/fonction.lib.php");
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
 
 if(isset($_GET["action"])){
-    if($_GET["action"] == "ajouter"){
-        $nom = $_POST["nom"];
-        $mp = password_hash($_POST["mp"],PASSWORD_DEFAULT);
-        $couriel = $_POST["email"];
-        ajouterUtilisateur($conn,$nom,$couriel,$mp);
-    }
     if($_GET["action"] == "connection"){
         $mp = password_hash($_POST["mp"],PASSWORD_DEFAULT);
         $couriel = $_POST["email"];
-        
+        if(verifUsager($conn,$couriel,$mp)){
+            
+        }
     }
 }
 ?>
