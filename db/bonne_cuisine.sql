@@ -23,9 +23,9 @@ create table if not exists commande (
     PRIMARY KEY (idCommande,noMenu),
     FOREIGN KEY (noFacture) REFERENCES facture(idFacture)
 );
-
+drop table usager;
 create table if not exists usager (
-    idUsager SMALLINT not null Primary Key,
+    idUsager SMALLINT not null Primary Key AUTO_INCREMENT,
     nom      varchar(45),
     motPasse   varchar(250),
     courriel varchar(50)
