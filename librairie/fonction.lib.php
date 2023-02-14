@@ -47,6 +47,17 @@ function deletePanier($conn,$panier){
     $result = $conn->exec($requete);
 
 }
+
+
+function ajouterUtilisateur($conn,$nom,$couriel,$mp){
+    $data = [
+        'nom' => $nom,
+        'couriel' => $couriel,
+        'mp' => $mp
+    ];
+    $requete = $conn->prepare("INSERT into usager(nom,motPasse,courriel) VALUES(:nom,:mp,:couriel)");
+    $requete->execute($data);
+}
     
 //---------------------------------------------------------------------------------------------------------------------------//
 
