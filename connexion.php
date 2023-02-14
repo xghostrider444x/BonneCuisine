@@ -6,7 +6,8 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 ?>
 
 <div>
-    <form method="post" >
+    <form method="post">
+        
 
     </form>
 </div>
