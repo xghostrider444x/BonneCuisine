@@ -27,7 +27,7 @@ create table if not exists commande (
 create table if not exists usager (
     idUsager SMALLINT not null Primary Key,
     nom      varchar(45),
-    motPasse   varchar(50),
+    motPasse   varchar(250),
     courriel varchar(50)
 );
 
