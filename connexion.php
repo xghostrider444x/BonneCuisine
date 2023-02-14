@@ -8,7 +8,8 @@ if(isset($_GET["action"])){
         $mp = password_hash($_POST["mp"],PASSWORD_DEFAULT);
         $couriel = $_POST["email"];
         if(verifUsager($conn,$couriel,$mp)){
-            
+            session_start();
+            $_SESSION["usager"] = $couriel;
         }
     }
 }
