@@ -4,13 +4,13 @@ function connection($bd){
     $bd = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
     return $bd;
 }
-
-function verifUsager($conn,$couriel,$mp){
+// Cette fonction vérifie si le courriel et le mot de passe de l'usager est valide (Retourne un Boolean)
+function verifUsager($conn,$courriel,$mp){
     $valide = true;
     $nbRow = 0;
 
-    $requete = $conn->prepare("SELECT * from usager where courriel=:couriel");
-    $requete->execute(array('courriel'=>$couriel));
+    $requete = $conn->prepare("SELECT * from usager where courriel=:courriel");
+    $requete->execute(array('courriel'=>$courriel));
     $nbRow = $requete->rowCount();
 
     if($nbRow == 0){
@@ -72,13 +72,13 @@ function deletePanier($conn,$panier){
 }
 
 
-function ajouterUtilisateur($conn,$nom,$couriel,$mp){
+function ajouterUtilisateur($conn,$nom,$courriel,$mp){
     $data = [
         'nom' => $nom,
-        'couriel' => $couriel,
+        'courriel' => $courriel,
         'mp' => $mp
     ];
-    $requete = $conn->prepare("INSERT into usager(nom,motPasse,courriel) VALUES(:nom,:mp,:couriel)");
+    $requete = $conn->prepare("INSERT into usager(nom,motPasse,courriel) VALUES(:nom,:mp,:courriel)");
     $requete->execute($data);
 }
     
