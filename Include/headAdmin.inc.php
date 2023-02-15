@@ -28,10 +28,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" href=""></a>
-        <a class="nav-link active" href="menu.php">Modifier menu </a>
-        <a class="nav-link active" href="#">Passer une commande</a>
-        <a class="nav-link active" href="#">Nous rejoindre</a>
+        <a class="nav-link active" href="menu.php">Menu</a>
+        <a class="nav-link active" href="">Ajouter un Menu </a>
+        <a class="nav-link active" href="#">Modifier un Menu</a>
+        <a class="nav-link active" href="#">Supprimer un Menu</a>
         
       </div>
       
