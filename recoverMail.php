@@ -15,9 +15,10 @@ if(!verifMail($conn,$mail)){
     echo "
     <div class='container'>
         <div class='pinkie'>
-            <h3>Le courriel que vous avez entré est invalide</h3> 
+            <h3>Le courriel que vous avez entré est invalide</h3>
         </div>
     </div>";
+    include("include/foot.inc.php");
 }
 else{
 $cryptedId = getCryptedId($conn,$mail);
@@ -34,6 +35,7 @@ $texte = iconv('utf-8','ISO-8859-1', $texte);
 $texte = wordwrap($texte, 150, "\r\n",true);
 
 if(mail($mail,$objet,$texte,$entete)){
+    include("include/head.inc.php");
     echo 
     "<h1 class='text-center'>Merci de votre achat</h1>
     <br><br>
@@ -43,7 +45,9 @@ if(mail($mail,$objet,$texte,$entete)){
     <p>Retourner a la page principale</p>
     <a href=index.php>Retourner à la page principale</a>
     </div>
+    
     ";
+    include("include/foot.inc.php");
 }
 }
 
