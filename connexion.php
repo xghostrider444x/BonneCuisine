@@ -1,13 +1,12 @@
 <?php 
 include("librairie/fonction.lib.php");
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
-
+session_start();
 if(isset($_GET["action"])){
     if($_GET["action"] == "connexion"){
         $mp = $_POST["mp"];
         $couriel = $_POST["email"];
         if(verifUsager($conn,$couriel,$mp)){
-            session_start();
             $_SESSION["usager"] = $couriel;
             header('Location:index.php');
         }
