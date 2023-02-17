@@ -1,4 +1,11 @@
 <?php
+
+if(isset($_GET["action"])){
+    if($_GET["action"] == "deconexion"){
+        session_start();
+        session_destroy();    
+    }
+}
 session_start();
     if(isset($_SESSION["usager"])){
         include("include/headAdmin.inc.php");
