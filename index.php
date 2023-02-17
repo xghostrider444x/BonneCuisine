@@ -1,4 +1,5 @@
 <?php
+session_start();
     if(isset($_SESSION["usager"])){
         include("include/headAdmin.inc.php");
     }
@@ -21,5 +22,10 @@
 </div>
 
 <?php
-include("include/foot.inc.php");
+if(isset($_SESSION["usager"])){
+    include("include/footAdmin.inc.php");
+}
+else{
+   include("include/foot.inc.php");
+}
 ?>

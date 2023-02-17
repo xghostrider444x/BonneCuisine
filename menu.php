@@ -1,22 +1,30 @@
 <?php
+$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+session_start();
 if(isset($_SESSION["usager"])){
+    include("librairie/fonctionAdmin.lib.php");
     include("include/headAdmin.inc.php");
+    echo "<h2 class='titreMenu text-center'>Nos Menu</h2>";
+    afficherMenuAdmin($conn);
 }
 else{
-   include("include/head.inc.php");
-}
     include("librairie/fonction.lib.php");
-    $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+   include("include/head.inc.php");
+   echo "<h2 class='titreMenu text-center'>Nos Menu</h2>";
+   afficherMenu($conn);
+}
 ?>
-<h2 class="titreMenu text-center">Nos Menu</h2>
-
 <div >
     <?php 
-        afficherMenu($conn);
         echo "<br><br>";
     ?>
 </div>
-
 <?php
-include("include/foot.inc.php");
+if(isset($_SESSION["usager"])){
+    include("include/footAdmin.inc.php");
+}
+else{
+   include("include/foot.inc.php");
+}
+
 ?>

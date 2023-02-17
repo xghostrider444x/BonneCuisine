@@ -8,11 +8,10 @@ function connection($bd){
 function verifUsager($conn,$courriel,$mp){
     $valide = true;
     $nbRow = 0;
-
     $requete = $conn->prepare("SELECT * from usager where courriel=:courriel");
     $requete->execute(array('courriel'=>$courriel));
     $nbRow = $requete->rowCount();
-
+    echo $nbRow;
     if($nbRow == 0){
         $valide = false;
     }
@@ -24,6 +23,19 @@ function verifUsager($conn,$courriel,$mp){
         else{
             $valide = false;
         }
+    }
+    return $valide;
+}
+function verifMail($conn,$email){
+    $requete = $conn->prepare("SELECT * from usager where courriel=:courriel");
+    $requete->execute(array('courriel'=>$email));
+    $nbRow = $requete->rowCount();
+    $valide = true;
+    if($nbRow == 0){
+        $valide = false;
+    }
+    else{
+        $valide = true;
     }
     return $valide;
 }
@@ -73,6 +85,7 @@ function deletePanier($conn,$panier){
 
 
 function ajouterUtilisateur($conn,$nom,$courriel,$mp){
+
     $data = [
         'nom' => $nom,
         'courriel' => $courriel,
@@ -80,6 +93,21 @@ function ajouterUtilisateur($conn,$nom,$courriel,$mp){
     ];
     $requete = $conn->prepare("INSERT into usager(nom,motPasse,courriel) VALUES(:nom,:mp,:courriel)");
     $requete->execute($data);
+}
+
+function resetPassword($conn,$id,$mp){
+    $mp = password_hash($mp,PASSWORD_DEFAULT);
+    $requete = "SELECT * from usager";
+    $resultat = $conn->query($requete);
+    $resultat->setFetchMode(PDO::FETCH_OBJ);
+    while($ligne = $resultat->fetch()){
+        if(password_verify($ligne->idUsager,$id)){
+            $resetRequest = "UPDATE usager set motPasse = '$mp' where idUsager = '$ligne->idUsager'";
+            $result = $conn->exec($resetRequest);
+            
+        }
+    }
+
 }
     
 //---------------------------------------------------------------------------------------------------------------------------//
@@ -219,5 +247,11 @@ function afficherElementPourCourriel($conn,$panier){
         return $texteFinal;
 }
 
-
-?>
+function getCryptedId($conn,$email){
+    $requete = $conn->prepare("SELECT * from usager where courriel=:courriel");
+    $requete->execute(array('courriel'=>$email));
+    $ligne = $requete->fetch();
+    $cryptedId = password_hash($ligne['idUsager'],PASSWORD_DEFAULT);
+    return $cryptedId;
+    
+}
