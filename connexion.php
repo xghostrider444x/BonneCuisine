@@ -2,6 +2,12 @@
 include("librairie/fonction.lib.php");
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
 session_start();
+if(isset($_SESSION["usager"])){
+    include("include/headAdmin.inc.php");
+}
+else{
+   include("include/head.inc.php");
+}
 if(isset($_GET["action"])){
     if($_GET["action"] == "connexion"){
         $mp = $_POST["mp"];
@@ -10,15 +16,19 @@ if(isset($_GET["action"])){
             $_SESSION["usager"] = $couriel;
             header('Location:index.php');
         }
+        else{
+            echo "
+            <div class='container'>
+                <div class='pinkie'>
+                    <h3>Le mot de passe ou l'adresse courriel est invalide</h3>
+                </div>
+            
+            </div>";
+        }
     }
     
 }
-if(isset($_SESSION["usager"])){
-    include("include/headAdmin.inc.php");
-}
-else{
-   include("include/head.inc.php");
-}
+
 ?>
 
 <div>
