@@ -1,4 +1,4 @@
 #!/bin/sh
 
-php -f /usr/local/var/www/BonneCuisine/ResetPanier.php
+php -f /usr/local/var/www/BonneCuisine/admin/ResetPanier.php
 
