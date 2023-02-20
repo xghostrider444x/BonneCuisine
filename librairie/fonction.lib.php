@@ -11,7 +11,6 @@ function verifUsager($conn,$courriel,$mp){
     $requete = $conn->prepare("SELECT * from usager where courriel=:courriel");
     $requete->execute(array('courriel'=>$courriel));
     $nbRow = $requete->rowCount();
-    echo $nbRow;
     if($nbRow == 0){
         $valide = false;
     }
@@ -104,7 +103,7 @@ function resetPassword($conn,$id,$mp){
         if(password_verify($ligne->idUsager,$id)){
             $resetRequest = "UPDATE usager set motPasse = '$mp' where idUsager = '$ligne->idUsager'";
             $result = $conn->exec($resetRequest);
-            
+
         }
     }
 
