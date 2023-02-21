@@ -14,6 +14,8 @@ if(isset($_GET["action"])){
     if($_GET["action"]== "ajouter"){
         $newMenu = new menuclass($_POST["nom"],$_POST["description"],$_POST["prix"]);
         $newMenu->ajouterMenu($conn);
+        $file = $_POST["img"];
+        $newMenu->ajouterImage($file);
     }
 }
 
@@ -41,6 +43,13 @@ if(isset($_GET["action"])){
         <input type="text" class="form-control" id="inputPassword" name="prix" placeholder="Prix">
         </div>
     </div>
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Image</label>
+        <div class="col-sm-10">
+        <input type="file" class="form-control" id="inputPassword" name="img" accept="image/png, image/jpeg">
+        </div>
+    </div>
+
     <br>
     <br>
     <div class="text-center">   
