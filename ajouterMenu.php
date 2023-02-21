@@ -1,7 +1,22 @@
-<?php 
-include("include/headAdmin.inc.php");
+<?php
+session_start();
+if(isset($_SESSION["usager"])){
+    include("include/headAdmin.inc.php");
+}
+else{
+   header("Location:index.php");
+}
 include("librairie/fonction.lib.php");
+include("class/menuClass.php");
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+
+if(isset($_GET["action"])){
+    if($_GET["action"]== "ajouter"){
+        $newMenu = new menuclass($_POST["nom"],$_POST["description"],$_POST["prix"]);
+        $newMenu->ajouterMenu($conn);
+    }
+}
+
 ?>
 
 <div>
