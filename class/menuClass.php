@@ -43,7 +43,17 @@ class Menu{
         return $this->prix;
     }
 
+    public function ajouterMenu(){
 
+    }
+
+    public function modifierMenu(){
+
+    }
+
+    public function suprimerMenu(){
+
+    }
 
 
 
