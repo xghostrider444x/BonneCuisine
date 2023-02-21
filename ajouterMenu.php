@@ -12,17 +12,16 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 
 if(isset($_GET["action"])){
     if($_GET["action"]== "ajouter"){
-        $newMenu = new menuclass($_POST["nom"],$_POST["description"],$_POST["prix"]);
+        $newMenu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
         $newMenu->ajouterMenu($conn);
-        $file = $_POST["img"];
-        $newMenu->ajouterImage($file);
+        $newMenu->ajouterImage();
     }
 }
 
 ?>
 
 <div>
-    <form method="post" action="ajouterMenu.php?action=ajouter">
+    <form method="post" action="ajouterMenu.php?action=ajouter" enctype="multipart/form-data">
     <div class="container pinkie">
         <h3 class="text-center">Créer un nouveau menu</h3>
         <div class="form-group row">
@@ -46,7 +45,7 @@ if(isset($_GET["action"])){
     <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">Image</label>
         <div class="col-sm-10">
-        <input type="file" class="form-control" id="inputPassword" name="img" accept="image/png, image/jpeg">
+        <input type="file" class="form-control" id="inputPassword" name="img" accept="image/png, image/jpeg" limit="200000">
         </div>
     </div>
 
