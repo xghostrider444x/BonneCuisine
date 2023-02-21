@@ -61,7 +61,7 @@ class Menu{
     }
 
     public function modifierMenu(){
-
+        
     }
 
     public function suprimerMenu(){
