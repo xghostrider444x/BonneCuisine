@@ -43,8 +43,16 @@ class Menu{
         return $this->prix;
     }
 
-    public function ajouterMenu(){
-
+    public function ajouterMenu($conn){
+        $data = [
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'prix' => $this->prix,
+        ];
+        $requete = $conn->prepare("INSERT into menu_fr(nom,description,prix) values(:nom,:description:prix)");
+        $requete->execute($data);
+        $requete = $conn->prepare("INSERT into menu_en(nom,description,prix) values(:nom,:description:prix)");
+        $requete->execute($data);
     }
 
     public function modifierMenu(){
@@ -55,7 +63,9 @@ class Menu{
 
     }
 
+    public function ajouterImage(){
 
+    }
 
 }
 ?>
