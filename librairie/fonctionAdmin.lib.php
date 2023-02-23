@@ -43,7 +43,7 @@ function afficherModifierMenu($conn){
                     </ul>
                 </div>
                 <div class='col'>
-                    <a href='panier.php?action=ajouter&id=".$ligne->idMenu."' method'post'>Ajouter à la commande ...</a>
+                    <a href='modifierMenu.php?id=".$ligne->idMenu."' method'post'>Modifier le Menu</a>
                 </div>
             </div>
         </div>
