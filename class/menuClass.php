@@ -60,11 +60,20 @@ class Menu{
         $this->setIdMenu($id["idMenu"]);
     }
 
-    public function modifierMenu(){
-        
+    public function modifierMenu($conn,$id){
+        $data = [
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'prix' => $this->prix,
+            'id' => $id
+        ];
+        $requete = $conn->prepare("UPDATE menu_fr set nom = :nom, description=:description, prix=:prix where idMenu = :id");
+        $requete->execute($data);
+        $this->setIdMenu($id);
     }
 
-    public function suprimerMenu(){
+    public function suprimerMenu($conn){
+        
 
     }
 
@@ -72,6 +81,7 @@ class Menu{
         $fichier = $_FILES['img']['tmp_name'];
         move_uploaded_file($fichier,"images/$this->idMenu.png");
     }
+
 
 }
 ?>

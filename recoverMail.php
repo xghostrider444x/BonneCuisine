@@ -26,7 +26,7 @@ $objet = iconv('utf-8','ISO-8859-1',"Réinitialisé votre mot de passe");
 
 $texte = "Bonjour, \r\n";
 $texte .= "Vous avez fait une demande pour réinitialiser votre mot de passe. Pour se faire, cliker sur le lien suivant\r\n";
-$texte .= "http:".$_SERVER['HTTP_HOST'].dirname[$_SERVER['REQUEST_URL']]."/motpasse.php?no=$milliseconds&id=$cryptedId \r\n\n";
+$texte .= "http:".$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URL'])."/motpasse.php?no=$milliseconds&id=$cryptedId \r\n\n";
 
 $texte .= "Attention, ce lien n'est valide que pour les 5 prochaine minutes. Dépassez ce délai, vous devrez faire une nouvelle demande \r\n\n";
 $texte .= "Meilleur salutation de la par de l'équipe du Sugar Cube Corner. ";

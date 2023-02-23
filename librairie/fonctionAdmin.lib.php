@@ -43,7 +43,7 @@ function afficherModifierMenu($conn){
                     </ul>
                 </div>
                 <div class='col'>
-                    <a href='modifierMenu.php?id=".$ligne->idMenu."' method'post'>Modifier le Menu</a>
+                    <a href='modifierUnMenu.php?id=".$ligne->idMenu."' method'post'>Modifier le Menu</a>
                 </div>
             </div>
         </div>
@@ -51,5 +51,21 @@ function afficherModifierMenu($conn){
         }
         $resultat->closeCursor( );
 
+}
+
+function afficherTableSupprimerMenu($conn){
+    $requete = "SELECT * from menu_fr;";
+        $resultat = $conn->query($requete);
+        $resultat->setFetchMode(PDO::FETCH_OBJ);
+        while($ligne = $resultat->fetch( )){
+            echo "
+                <tr>
+                    <td><input type='checkbox' name='menu".$ligne->idMenu."'></td>
+                    <td>$ligne->nom</td>
+                    <td>$ligne->description</td>
+                    <td>$ligne->prix $</td>
+                </tr>
+            ";
+        }
 }
 ?>
