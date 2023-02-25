@@ -60,7 +60,7 @@ function afficherTableSupprimerMenu($conn){
         while($ligne = $resultat->fetch( )){
             echo "
                 <tr>
-                    <td><input type='checkbox' name='menu' value='".$ligne->idMenu"'></td>
+                    <td><input type='checkbox' name='menu[]' value='".$ligne->idMenu."'></td>
                     <td>$ligne->nom</td>
                     <td>$ligne->description</td>
                     <td>$ligne->prix $</td>
@@ -68,4 +68,19 @@ function afficherTableSupprimerMenu($conn){
             ";
         }
 }
+
+function IsChecked($chkname,$value)
+    {
+        if(!empty($_POST[$chkname]))
+        {
+            foreach($_POST[$chkname] as $chkval)
+            {
+                if($chkval == $value)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 ?>
