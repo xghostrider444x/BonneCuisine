@@ -13,7 +13,11 @@ class Menu{
             $this->setDescription($args[1]);
             $this->setPrix($args[2]);
         }
+        if($ctp == 4){
+            $this.setIdMenu($args[3]);
+        }
     }
+
 
     public function setIdMenu($idMenu){
         $this->idMenu = $idMenu;
@@ -60,20 +64,25 @@ class Menu{
         $this->setIdMenu($id["idMenu"]);
     }
 
-    public function modifierMenu($conn,$id){
+    public function modifierMenu($conn){
         $data = [
             'nom' => $this->nom,
             'description' => $this->description,
             'prix' => $this->prix,
-            'id' => $id
+            'id' => $this->idMenu,
         ];
         $requete = $conn->prepare("UPDATE menu_fr set nom = :nom, description=:description, prix=:prix where idMenu = :id");
         $requete->execute($data);
-        $this->setIdMenu($id);
+        
     }
 
     public function suprimerMenu($conn){
-        
+        $data = [
+            'nom' => $this->nom,
+            'description' => $this->description,
+            'prix' => $this->prix,
+            'id' => $this->idMenu,
+        ];
 
     }
 

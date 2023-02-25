@@ -12,7 +12,14 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 
 if(isset($_GET["action"])){
     if($_GET["action"] == "supprimer"){
-        
+        $requete = "SELECT * from menu_fr;";
+        $resultat = $conn->query($requete);
+        $resultat->setFetchMode(PDO::FETCH_OBJ);
+        while($ligne = $resultat->fetch( )){
+            if(isChecked('menu',$ligne->idMenu)){
+                
+            }
+        }
     }
 }
 ?>

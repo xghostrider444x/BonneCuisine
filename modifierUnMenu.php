@@ -15,7 +15,7 @@ if(isset($_GET['id'])){
     if(isset($_GET["action"])){
         if($_GET["action"]=="modifier"){
             $menu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
-            $menu->modifierMenu($conn,$_GET['id']);
+            $menu->modifierMenu($conn);
             $menu->ajouterImage();
         }
 
