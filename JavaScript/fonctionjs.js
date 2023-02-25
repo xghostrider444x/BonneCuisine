@@ -7,4 +7,10 @@ function getEmailForPassword(){
     var courriel = prompt("Entrer votre adresse courriel");
     document.lostPassword.action="recoverMail.php?action=sendRecoverEmail&courriel="+courriel;
 }
+function askPermissionToDelete(){
+    if(confirm("Vous êtes sur le point de supprimer les menus sélectionnés voulez-vous toujours procédés?")){
+        document.supprimer.action="supprimerMenu.php?action=supprimer";
+    }
+}
+
 
