@@ -14,7 +14,7 @@ class Menu{
             $this->setPrix($args[2]);
         }
         if($ctp == 4){
-            $this.setIdMenu($args[3]);
+            $this->setIdMenu($args[3]);
         }
     }
 
@@ -73,17 +73,17 @@ class Menu{
         ];
         $requete = $conn->prepare("UPDATE menu_fr set nom = :nom, description=:description, prix=:prix where idMenu = :id");
         $requete->execute($data);
+        $requete = $conn->prepare("UPDATE menu_en set nom = :nom, description=:description, prix=:prix where idMenu = :id");
+        $requete->execute($data);
         
     }
 
-    public function suprimerMenu($conn){
+    public function supprimerMenu($conn){
         $data = [
-            'nom' => $this->nom,
-            'description' => $this->description,
-            'prix' => $this->prix,
             'id' => $this->idMenu,
         ];
-
+        $requete= $conn->prepare("DELETE from menu_fr where idMenu = :id");
+        $requete->execute($data);
     }
 
     public function ajouterImage(){
@@ -91,6 +91,19 @@ class Menu{
         move_uploaded_file($fichier,"images/$this->idMenu.png");
     }
 
+    public function supprimerImage(){
+        if(file_exists("images/$this->idMenu.png")){
+            unlink("images/$this->idMenu.png");
+        }
+        else{
+            echo "
+            <div class='container'>
+                <div class='text-center pinkie'>
+                    <h3>L'image $this->idMenu.png n'existe pas!</h3>
+                </div>
+            </div>";
+        }
+    }
 
 }
 ?>
