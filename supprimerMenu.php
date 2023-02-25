@@ -17,7 +17,15 @@ if(isset($_GET["action"])){
         $resultat->setFetchMode(PDO::FETCH_OBJ);
         while($ligne = $resultat->fetch( )){
             if(isChecked('menu',$ligne->idMenu)){
-                
+                $menu = new Menu($ligne->nom,$ligne->description,$ligne->prix,$ligne->idMenu);
+                $menu->supprimerImage();
+                $menu->supprimerMenu($conn);
+                echo "
+                    <div class='container'>
+                        <div class='text-center pinkie'>
+                            <h3>Les menus ont été supprimés</h3>
+                        </div>
+                    </div>";
             }
         }
     }
@@ -27,7 +35,7 @@ if(isset($_GET["action"])){
 <div class="text-center">
     <h3>Supprimer un menu</h3>
 </div>
-<form method="post" action="action=supprimer" >
+<form method="post" name="supprimer">
     <table class="table table-bordered table-dark">
         <thead class="thead-dark">
         <tr>
@@ -42,7 +50,7 @@ if(isset($_GET["action"])){
     </tbody>
     </table>
     <div class="text-center">   
-            <input type="submit" name="submit" value="Supprimer">      
+            <input type="submit" onclick="askPermissionToDelete()" name="submit" value="Supprimer">      
             <input type="reset" name="reset" value="Annuler">         
     </div>
 </form>
