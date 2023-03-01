@@ -254,3 +254,12 @@ function getCryptedId($conn,$email){
     return $cryptedId;
     
 }
+
+function afficherMessageAvecCSS($message){
+    echo "
+                    <div class='container'>
+                        <div class='text-center pinkie'>
+                            <h3>$message</h3>
+                        </div>
+                    </div>";
+}
