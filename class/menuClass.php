@@ -62,6 +62,7 @@ class Menu{
         $requete->execute(array('nom'=>$this->nom));
         $id = $requete->fetch();
         $this->setIdMenu($id["idMenu"]);
+        return true;
     }
 
     public function modifierMenu($conn){
@@ -75,7 +76,7 @@ class Menu{
         $requete->execute($data);
         $requete = $conn->prepare("UPDATE menu_en set nom = :nom, description=:description, prix=:prix where idMenu = :id");
         $requete->execute($data);
-        
+        return true;
     }
 
     public function supprimerMenu($conn){
@@ -84,11 +85,15 @@ class Menu{
         ];
         $requete= $conn->prepare("DELETE from menu_fr where idMenu = :id");
         $requete->execute($data);
+        return true;
     }
 
     public function ajouterImage(){
-        $fichier = $_FILES['img']['tmp_name'];
-        move_uploaded_file($fichier,"images/$this->idMenu.png");
+        if($_FILES['img'] != null){
+            $fichier = $_FILES['img']['tmp_name'];
+            move_uploaded_file($fichier,"images/$this->idMenu.png");
+        }
+        
     }
 
     public function supprimerImage(){
