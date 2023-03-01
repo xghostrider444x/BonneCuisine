@@ -7,6 +7,7 @@ else{
    header("Location:index.php");
 }
 include("librairie/fonctionAdmin.lib.php");
+include("librairie/fonction.lib.php");
 include("class/menuClass.php");
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
 
@@ -20,14 +21,10 @@ if(isset($_GET["action"])){
                 $menu = new Menu($ligne->nom,$ligne->description,$ligne->prix,$ligne->idMenu);
                 $menu->supprimerImage();
                 $menu->supprimerMenu($conn);
-                echo "
-                    <div class='container'>
-                        <div class='text-center pinkie'>
-                            <h3>Les menus ont été supprimés</h3>
-                        </div>
-                    </div>";
+                afficherMessageAvecCSS("Le menu $ligne->nom a été supprimé avec succès");
             }
         }
+        
     }
 }
 ?>

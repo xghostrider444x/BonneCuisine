@@ -15,7 +15,7 @@ if(isset($_GET["action"])){
         $newMenu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
         $newMenu->ajouterMenu($conn);
         $newMenu->ajouterImage();
-        
+        afficherMessageAvecCSS("Le menu a bien été ajouté");
     }
 }
 
