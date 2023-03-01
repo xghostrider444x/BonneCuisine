@@ -8,7 +8,7 @@ class Menu{
     public function __construct(){
         $ctp = func_num_args();
         $args = func_get_args();
-        if($ctp == 3){
+        if($ctp >= 3){
             $this->setNom($args[0]);
             $this->setDescription($args[1]);
             $this->setPrix($args[2]);
@@ -61,8 +61,8 @@ class Menu{
         $requete = $conn->prepare("SELECT idMenu from menu_fr where nom = :nom");
         $requete->execute(array('nom'=>$this->nom));
         $id = $requete->fetch();
-        $this->setIdMenu($id["idMenu"]);
-        return true;
+        $this->setIdMenu((int)$id["idMenu"]);
+       
     }
 
     public function modifierMenu($conn){
@@ -72,11 +72,10 @@ class Menu{
             'prix' => $this->prix,
             'id' => $this->idMenu,
         ];
-        $requete = $conn->prepare("UPDATE menu_fr set nom = :nom, description=:description, prix=:prix where idMenu = :id");
+        $requete = $conn->prepare("UPDATE menu_fr set nom=:nom,description=:description,prix=:prix where idMenu=:id");
         $requete->execute($data);
-        $requete = $conn->prepare("UPDATE menu_en set nom = :nom, description=:description, prix=:prix where idMenu = :id");
+        $requete = $conn->prepare("UPDATE menu_fr set nom=:nom,description=:description,prix=:prix where idMenu=:id");
         $requete->execute($data);
-        return true;
     }
 
     public function supprimerMenu($conn){
@@ -89,11 +88,8 @@ class Menu{
     }
 
     public function ajouterImage(){
-        if($_FILES['img'] != null){
-            $fichier = $_FILES['img']['tmp_name'];
-            move_uploaded_file($fichier,"images/$this->idMenu.png");
-        }
-        
+        $fichier = $_FILES['img']['tmp_name'];
+        move_uploaded_file($fichier,"images/$this->idMenu.png"); 
     }
 
     public function supprimerImage(){
