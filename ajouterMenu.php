@@ -13,8 +13,9 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 if(isset($_GET["action"])){
     if($_GET["action"]== "ajouter"){
         $newMenu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
-        $newMenu->ajouterMenu($conn);
-        $newMenu->ajouterImage();
+        if($newMenu->ajouterMenu($conn)){
+            $newMenu->ajouterImage();
+        }
     }
 }
 
