@@ -186,7 +186,7 @@ function afficherMenu($conn){
             echo "<div class='container text-center' style='border:2px solid black; padding:10px; background-color: lightpink;'>
             <div class='row'>
                 <div class='col'>
-                    <img src='images/".$ligne->idMenu.".png'>
+                    <img src='images/".$ligne->idMenu.".png' width='200px' height='125px'>
                 </div>
                 <div class='col'>
                     <ul style='list-style-type: none;'>
