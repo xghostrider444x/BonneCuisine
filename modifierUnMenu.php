@@ -13,8 +13,9 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 
 if(isset($_GET['id'])){
     if(isset($_GET["action"])){
+        echo "action set";
         if($_GET["action"]=="modifier"){
-            $menu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
+            $menu = new Menu($_POST["nom"], $_POST["description"], $_POST["prix"], $_GET["id"]);
             $menu->modifierMenu($conn);
             $menu->ajouterImage();
         }
@@ -37,11 +38,11 @@ echo "
                     <div class='container'>
                         <h3 class='text-center'>Modifier Caractéristique du menu</h3>
                         <div class='form-group row'>
-                        <label for='staticEmail' class='col-sm-2 col-form-label'>Nom</label>
-                        <div class='col-sm-10'>
-                        <input type='text' class='form-control' id='staticEmail' name='nom' value='$ligne->nom'>
+                            <label for='staticEmail' class='col-sm-2 col-form-label'>Nom</label>
+                            <div class='col-sm-10'>
+                                <input type='text' class='form-control' id='staticEmail' name='nom' value='$ligne->nom'>
+                            </div>
                         </div>
-                    </div>
                     <div class='form-group row'>
                         <label for='staticEmail' class='col-sm-2 col-form-label'>description</label>
                         <div class='col-sm-10'>
@@ -57,21 +58,19 @@ echo "
                     <div class='form-group row'>
                         <label for='inputPassword' class='col-sm-2 col-form-label'>Image</label>
                         <div class='col-sm-10'>
-                        <input type='file' class='form-control' id='inputPassword' name='img' accept='image/png, image/jpeg' limit='200000'>
+                        <input type='file' class='form-control' name='img' accept='image/png, image/jpeg' limit='2000000'>
                         </div>
                     </div>
 
                     <br>
                     <br>
                     <div class='text-center'>   
-                            <input type='submit' name='submit' value='Modifier'>      
+                            <input type='submit' value='Modifier'>      
                             <input type='reset' name='reset' value='Annuler'>         
                     </div>
-                </div>
             </form>
         </div>
     </div>
-       
 </div>";
 ?>     
     
