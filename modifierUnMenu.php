@@ -13,7 +13,6 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 
 if(isset($_GET['id'])){
     if(isset($_GET["action"])){
-        echo "action set";
         if($_GET["action"]=="modifier"){
             $menu = new Menu($_POST["nom"], $_POST["description"], $_POST["prix"], $_GET["id"]);
             $menu->modifierMenu($conn);
