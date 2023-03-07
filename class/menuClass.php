@@ -62,7 +62,11 @@ class Menu{
         $requete->execute(array('nom'=>$this->nom));
         $id = $requete->fetch();
         $this->setIdMenu((int)$id["idMenu"]);
-       
+
+        if($this->ajouterImage()){
+            return true;
+        }
+        return false;
     }
 
     public function modifierMenu($conn){
@@ -76,6 +80,14 @@ class Menu{
         $requete->execute($data);
         $requete = $conn->prepare("UPDATE menu_fr set nom=:nom,description=:description,prix=:prix where idMenu=:id");
         $requete->execute($data);
+
+        if($this->modifierImage()){
+            return true;
+        }
+        else{
+           return false;
+        }
+        
     }
 
     public function supprimerMenu($conn){
@@ -84,10 +96,16 @@ class Menu{
         ];
         $requete= $conn->prepare("DELETE from menu_fr where idMenu = :id");
         $requete->execute($data);
-        return true;
+        if($this->supprimerImage()){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
 
-    public function ajouterImage(){
+    private function ajouterImage(){
         $verif = true;
         $id = $this->idMenu;
         if($_FILES['img']['size'] < 52428800){
@@ -101,7 +119,7 @@ class Menu{
         return $verif;
     }
 
-    public function supprimerImage(){
+    private function supprimerImage(){
         $verif = true;
         if(file_exists("images/$this->idMenu.png")){
             unlink("images/$this->idMenu.png");
@@ -118,7 +136,7 @@ class Menu{
         return $verif;
     }
     
-    public function modifierImage(){
+    private function modifierImage(){
         $verif = true;
         if($_FILES['img']['size'] < 52428800){
             if($this->supprimerImage()){
