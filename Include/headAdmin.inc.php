@@ -34,13 +34,7 @@
         <a class="nav-link active" href="ajouterMenu.php">Ajouter un Menu </a>
         <a class="nav-link active" href="modifierMenu.php">Modifier un Menu</a>
         <a class="nav-link active" href="supprimerMenu.php">Supprimer un Menu</a>
-        
       </div>
-      
-    </div>
-      
-    <div class="d-flex panierIcon">
-      <a class="nav-link" href="panier.php"><img src="images/panierIcon.png" style="width:30px;">Panier<img src="images/panierIcon.png" style="width:30px;"></a>
     </div>
   </div>
 </nav>
