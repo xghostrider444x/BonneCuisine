@@ -14,14 +14,15 @@ if(isset($_GET["action"])){
     if($_GET["action"]== "ajouter"){
         $verif = true;
         $newMenu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
-        $newMenu->ajouterMenu($conn);
-        if($newMenu->ajouterImage()){
+        if($newMenu->ajouterMenu($conn)){
             afficherMessageAvecCSS("Le menu a bien été ajouté");
         }
         else{
             $newMenu->supprimerMenu($conn);
             afficherMessageAvecCSS("Le fichier Image donner dépasse la limit de 5Mb\n\r Le Menu n'a pas été créée.");
         }
+
+
     }
 }
 
