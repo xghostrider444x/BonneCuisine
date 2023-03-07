@@ -12,10 +12,16 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 
 if(isset($_GET["action"])){
     if($_GET["action"]== "ajouter"){
+        $verif = true;
         $newMenu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
         $newMenu->ajouterMenu($conn);
-        $newMenu->ajouterImage();
-        afficherMessageAvecCSS("Le menu a bien été ajouté");
+        if($newMenu->ajouterImage()){
+            afficherMessageAvecCSS("Le menu a bien été ajouté");
+        }
+        else{
+            $newMenu->supprimerMenu($conn);
+            afficherMessageAvecCSS("Le fichier Image donner dépasse la limit de 5Mb\n\r Le Menu n'a pas été créée.");
+        }
     }
 }
 
@@ -28,25 +34,25 @@ if(isset($_GET["action"])){
         <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">Nom</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="staticEmail" name="nom" placeholder="nom">
+        <input required type="text" class="form-control" id="staticEmail" name="nom" placeholder="nom">
         </div>
     </div>
     <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">description</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="description" name="description" placeholder="description">
+        <input required type="text" class="form-control" id="description" name="description" placeholder="description">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">prix</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputPassword" name="prix" placeholder="Prix">
+        <input required type="text" class="form-control" id="inputPassword" name="prix" placeholder="Prix">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">Image</label>
         <div class="col-sm-10">
-        <input type="file" class="form-control" id="inputPassword" name="img" accept="image/png, image/jpeg" limit="200000">
+        <input required type="file" class="form-control" id="inputPassword" name="img" accept="image/png, image/jpeg">
         </div>
     </div>
 
