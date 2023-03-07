@@ -19,8 +19,7 @@ if(isset($_GET["action"])){
         while($ligne = $resultat->fetch( )){
             if(isChecked('menu',$ligne->idMenu)){
                 $menu = new Menu($ligne->nom,$ligne->description,$ligne->prix,$ligne->idMenu);
-                $menu->supprimerMenu($conn);
-                if($menu->supprimerImage()){
+                if($menu->supprimerMenu($conn)){
                     afficherMessageAvecCSS("Le menu $ligne->nom a été supprimé avec succès");
                 }
                 else{
