@@ -15,9 +15,14 @@ if(isset($_GET['id'])){
     if(isset($_GET["action"])){
         if($_GET["action"]=="modifier"){
             $menu = new Menu($_POST["nom"], $_POST["description"], $_POST["prix"], $_GET["id"]);
-            $menu->modifierMenu($conn);
-            $menu->modifierImage();
-            afficherMessageAvecCSS("Les modification apportées au menu ont été sauvegarder avec succès");
+            if($menu->modifierImage()){
+                $menu->modifierMenu($conn);
+                afficherMessageAvecCSS("Les modification apportées au menu ont été sauvegarder avec succès");
+            }
+            else{
+                afficherMessageAvecCSS("Le fichier image est tros volumineux les modification n'ont pas été apporter");
+            }
+            
         }
 
     }
@@ -31,7 +36,7 @@ echo "
     <div class='container pinkie'>
         <div class='col text-center'>
             <h3 style='border:2px solid black'>Image du menu</h3>
-            <img src='images/$ligne->idMenu.png'/>
+            <img src='images/$ligne->idMenu.png' width='300px' height='160px'/>
         </div>
         <div class='col'>
             <form method='post' action='modifierUnMenu.php?action=modifier&id=$ligne->idMenu' enctype='multipart/form-data'>
@@ -58,7 +63,7 @@ echo "
                     <div class='form-group row'>
                         <label for='inputPassword' class='col-sm-2 col-form-label'>Image</label>
                         <div class='col-sm-10'>
-                        <input type='file' class='form-control' name='img' accept='image/png, image/jpeg' limit='2000000'>
+                        <input type='file' class='form-control' name='img' accept='image/png, image/jpeg'>
                         </div>
                     </div>
 
