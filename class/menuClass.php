@@ -88,16 +88,21 @@ class Menu{
     }
 
     public function ajouterImage(){
-        $fichier = $_FILES['img']['tmp_name'];
-        move_uploaded_file($fichier,"images/$this->idMenu.png"); 
-    }
-
-    public function modifierImage(){
-        supprimerImage();
-        ajouterImage();
+        $verif = true;
+        $id = $this->idMenu;
+        if($_FILES['img']['size'] < 52428800){
+            $fichier = $_FILES['img']['tmp_name'];
+            $destination = "images/$id.png";
+            move_uploaded_file($fichier,$destination);
+        }
+        else{
+            $verif = false;
+        }
+        return $verif;
     }
 
     public function supprimerImage(){
+        $verif = true;
         if(file_exists("images/$this->idMenu.png")){
             unlink("images/$this->idMenu.png");
         }
@@ -108,7 +113,22 @@ class Menu{
                     <h3>L'image $this->idMenu.png n'existe pas!</h3>
                 </div>
             </div>";
+            $verif=false;
         }
+        return $verif;
+    }
+    
+    public function modifierImage(){
+        $verif = true;
+        if($_FILES['img']['size'] < 52428800){
+            if($this->supprimerImage()){
+                $verif = $this->ajouterImage();
+            }
+        }
+        else{
+            $verif = false;
+        }
+        return $verif;
     }
 
 }
