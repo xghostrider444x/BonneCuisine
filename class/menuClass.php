@@ -93,8 +93,8 @@ class Menu{
     }
 
     public function modifierImage(){
-        $fichier = $_FILES['img']['tmp_name'];
-        move_uploaded_file($fichier,"images/$this->idMenu.png"); 
+        supprimerImage();
+        ajouterImage();
     }
 
     public function supprimerImage(){
