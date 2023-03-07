@@ -15,8 +15,7 @@ if(isset($_GET['id'])){
     if(isset($_GET["action"])){
         if($_GET["action"]=="modifier"){
             $menu = new Menu($_POST["nom"], $_POST["description"], $_POST["prix"], $_GET["id"]);
-            if($menu->modifierImage()){
-                $menu->modifierMenu($conn);
+            if($menu->modifierMenu($conn)){
                 afficherMessageAvecCSS("Les modification apportées au menu ont été sauvegarder avec succès");
             }
             else{
