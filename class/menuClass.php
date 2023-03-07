@@ -92,6 +92,11 @@ class Menu{
         move_uploaded_file($fichier,"images/$this->idMenu.png"); 
     }
 
+    public function modifierImage(){
+        $fichier = $_FILES['img']['tmp_name'];
+        move_uploaded_file($fichier,"images/$this->idMenu.png"); 
+    }
+
     public function supprimerImage(){
         if(file_exists("images/$this->idMenu.png")){
             unlink("images/$this->idMenu.png");
