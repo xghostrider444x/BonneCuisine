@@ -177,8 +177,8 @@ function afficherMessageAucuneCommande(){
 }
 
 // Cette fonction affiche le menu des élément pouvant être commander. 
-function afficherMenu($conn){
-    $requete = "SELECT * from menu_fr;";
+function afficherMenu($conn,$lang,$format){
+    $requete = "SELECT * from menu_".$lang.";";
         $resultat = $conn->query($requete);
         $resultat->setFetchMode(PDO::FETCH_OBJ);
         while($ligne = $resultat->fetch( ))
@@ -192,7 +192,7 @@ function afficherMenu($conn){
                     <ul style='list-style-type: none;'>
                         <li><b>Nom : </b>".$ligne->nom."</li>
                         <li><b>Description : </b>".$ligne->description."</li>
-                        <li><b>Prix : </b>".$ligne->prix." $ CAD </li>
+                        <li><b>Prix : </b>".$ligne->prix." $ $format </li>
                     </ul>
                 </div>
                 <div class='col'>

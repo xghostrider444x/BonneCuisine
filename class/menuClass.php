@@ -47,18 +47,17 @@ class Menu{
         return $this->prix;
     }
 
-    public function ajouterMenu($conn){
+    public function ajouterMenu($conn,$lang){
         $data = [
             'nom' => $this->nom,
             'description' => $this->description,
             'prix' => $this->prix
         ];
-        $requete = $conn->prepare("INSERT into menu_fr(nom,description,prix) values(:nom,:description,:prix)");
+        $requete = $conn->prepare("INSERT into menu_".$lang."(nom,description,prix) values(:nom,:description,:prix)");
         $requete->execute($data);
-        $requete = $conn->prepare("INSERT into menu_en(nom,description,prix) values(:nom,:description,:prix)");
-        $requete->execute($data);
+        
         //Cette partie de code récupère le id qui a été attribuer au menu précédament créer;
-        $requete = $conn->prepare("SELECT idMenu from menu_fr where nom = :nom");
+        $requete = $conn->prepare("SELECT idMenu from menu_".$lang." where nom = :nom");
         $requete->execute(array('nom'=>$this->nom));
         $id = $requete->fetch();
         $this->setIdMenu((int)$id["idMenu"]);
@@ -69,16 +68,15 @@ class Menu{
         return false;
     }
 
-    public function modifierMenu($conn){
+    public function modifierMenu($conn,$lang){
         $data = [
+            'table' => "menu_".$lang,
             'nom' => $this->nom,
             'description' => $this->description,
             'prix' => $this->prix,
             'id' => $this->idMenu,
         ];
-        $requete = $conn->prepare("UPDATE menu_fr set nom=:nom,description=:description,prix=:prix where idMenu=:id");
-        $requete->execute($data);
-        $requete = $conn->prepare("UPDATE menu_fr set nom=:nom,description=:description,prix=:prix where idMenu=:id");
+        $requete = $conn->prepare("UPDATE :table set nom=:nom,description=:description,prix=:prix where idMenu=:id");
         $requete->execute($data);
 
         if($this->modifierImage()){
@@ -95,6 +93,8 @@ class Menu{
             'id' => $this->idMenu,
         ];
         $requete= $conn->prepare("DELETE from menu_fr where idMenu = :id");
+        $requete->execute($data);
+        $requete= $conn->prepare("DELETE from menu_en where idMenu = :id");
         $requete->execute($data);
         if($this->supprimerImage()){
             return true;

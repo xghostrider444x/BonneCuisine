@@ -9,6 +9,7 @@ else{
 }
 include("librairie/fonction.lib.php");
 include("class/menuClass.php");
+
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
 
 if(isset($_GET['id'])){
@@ -36,6 +37,9 @@ echo "
         <div class='col text-center'>
             <h3 style='border:2px solid black'>Image du menu</h3>
             <img src='images/$ligne->idMenu.png' width='300px' height='160px'/>
+        </div>
+        <div>
+        <div ><span class='text-right'><a href='?lang=fr&id=$ligne->idMenu'>Français </a>/ <a href='?lang=en&id=$ligne->idMenu'>English</a></span></div>
         </div>
         <div class='col'>
             <form method='post' action='modifierUnMenu.php?action=modifier&id=$ligne->idMenu' enctype='multipart/form-data'>

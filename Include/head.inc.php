@@ -15,8 +15,10 @@
     <title>Bonne Cuisine</title>
 </head>
 <body id="body" style="background-image: url('images/Sugar_Cube_Corner.jpeg'); ">
+
 <div class='position-sticky fixed-top'>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color:lightgreen;" >
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color:lightgreen;">
+  <div ><span class="text-right"><a href="?lang=fr">Français </a>/ <a href="?lang=en">English</a></span></div>
   <div class="container-fluid">
     <a class="navbar-brand nav-icon-menu" href="index.php">
     <img src="images/Knife.webp" style="width: 60px;">    
@@ -28,16 +30,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="menu.php">Nos menu</a>
-        <a class="nav-link active" href="#">Passer une commande</a>
-        <a class="nav-link active" href="#">Nous rejoindre</a>
+        <a class="nav-link active" aria-current="page" href="menu.php"> <?php echo $data["menu"] ?></a>
+        <a class="nav-link active" href="#"> <?php echo $data["commande"] ?></a>
+        <a class="nav-link active" href="#"> <?php echo $data["rejoindre"] ?></a>
         
       </div>
       
     </div>
       
     <div class="d-flex panierIcon">
-      <a class="nav-link" href="panier.php"><img src="images/panierIcon.png" style="width:30px;">Panier<img src="images/panierIcon.png" style="width:30px;"></a>
+      <a class="nav-link" href="panier.php"><img src="images/panierIcon.png" style="width:30px;"> <?php echo $data["panier"] ?><img src="images/panierIcon.png" style="width:30px;"></a>
     </div>
   </div>
 </nav>
