@@ -13,8 +13,9 @@ $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root
 if(isset($_GET["action"])){
     if($_GET["action"]== "ajouter"){
         $verif = true;
-        $newMenu = new Menu($_POST["nom"],$_POST["description"],$_POST["prix"]);
-        if($newMenu->ajouterMenu($conn)){
+        $newMenuFr = new Menu($_POST["nom_fr"],$_POST["description_fr"],$_POST["prix"]);
+        $newMenuEn = new Menu($_POST["nom_en"],$_POST["description_en"],$_POST["prix"]);
+        if($newMenuFr->ajouterMenu($conn,"fr")&&$newMenuEn->ajouterMenu($conn,"en")){
             afficherMessageAvecCSS("Le menu a bien été ajouté");
         }
         else{
@@ -35,25 +36,30 @@ if(isset($_GET["action"])){
         <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">Nom</label>
         <div class="col-sm-10">
-        <input required type="text" class="form-control" id="staticEmail" name="nom" placeholder="nom">
+        <input required type="text" class="form-control" id="staticEmail" name="nom_fr" placeholder="nom français">
+        <input required type="text" class="form-control" id="staticEmail" name="nom_en" placeholder="nom englais">
         </div>
     </div>
+    <br>
     <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">description</label>
         <div class="col-sm-10">
-        <input required type="text" class="form-control" id="description" name="description" placeholder="description">
+            <input required type="text" class="form-control" id="description" name="description_fr" placeholder="description français">
+            <input required type="text" class="form-control" id="description" name="description_en" placeholder="description anglais">
         </div>
     </div>
+    <br>
     <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">prix</label>
+        <label for="prix" class="col-sm-2 col-form-label">prix</label>
         <div class="col-sm-10">
-        <input required type="text" class="form-control" id="inputPassword" name="prix" placeholder="Prix">
+        <input required type="text" class="form-control" id="prix" name="prix" placeholder="Prix">
         </div>
     </div>
+    <br>
     <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Image</label>
+        <label for="img" class="col-sm-2 col-form-label">Image</label>
         <div class="col-sm-10">
-        <input required type="file" class="form-control" id="inputPassword" name="img" accept="image/png, image/jpeg">
+        <input required type="file" class="form-control" id="img" name="img" accept="image/png, image/jpeg">
         </div>
     </div>
 
