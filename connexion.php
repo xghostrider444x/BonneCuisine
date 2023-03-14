@@ -2,12 +2,17 @@
 include("librairie/fonction.lib.php");
 $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
 session_start();
+$lang = "fr";
+$file_contents = file_get_contents('lang/'.$lang.'.json');
+$data = json_decode($file_contents,true);
 if(isset($_SESSION["usager"])){
     include("include/headAdmin.inc.php");
 }
 else{
    include("include/head.inc.php");
 }
+
+
 if(isset($_GET["action"])){
     if($_GET["action"] == "connexion"){
         $mp = $_POST["mp"];
