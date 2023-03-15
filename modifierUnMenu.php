@@ -7,6 +7,15 @@ if(isset($_SESSION['usager'])){
 else{
    header("Location:index.php");
 }
+$lang = "fr";
+if(isset($_GET["lang"])){
+    if($_GET["lang"]=="fr"){
+        $lang = "fr";
+    }
+    if($_GET["lang"] == "en"){
+        $lang = "en";
+    }
+}
 include("librairie/fonction.lib.php");
 include("class/menuClass.php");
 
@@ -16,7 +25,7 @@ if(isset($_GET['id'])){
     if(isset($_GET["action"])){
         if($_GET["action"]=="modifier"){
             $menu = new Menu($_POST["nom"], $_POST["description"], $_POST["prix"], $_GET["id"]);
-            if($menu->modifierMenu($conn)){
+            if($menu->modifierMenu($conn,$lang)){
                 afficherMessageAvecCSS("Les modification apportées au menu ont été sauvegarder avec succès");
             }
             else{
