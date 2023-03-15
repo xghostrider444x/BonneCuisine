@@ -36,7 +36,7 @@ if(isset($_GET['id'])){
 
     }
 
-    $requete = "SELECT * from menu_fr where idMenu = ".$_GET['id']."";
+    $requete = "SELECT * from menu_$lang where idMenu = ".$_GET['id']."";
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
     $ligne = $resultat->fetch();
