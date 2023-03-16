@@ -125,12 +125,6 @@ class Menu{
             unlink("images/$this->idMenu.png");
         }
         else{
-            echo "
-            <div class='container'>
-                <div class='text-center pinkie'>
-                    <h3>L'image $this->idMenu.png n'existe pas!</h3>
-                </div>
-            </div>";
             $verif=false;
         }
         return $verif;
