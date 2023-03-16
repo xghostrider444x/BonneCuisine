@@ -205,6 +205,12 @@ function afficherMenu($conn,$lang,$format,$devise){
         </div>
         "; 
         }
+        echo "
+        <div class='container text-center'>
+        <div class='pinkie'>
+        <p>P.S. Le montant en devise <b>USD</b> est a titre indicatif. Ce dernier sera calculer au taux du jour lorsque la commande sera effectué et validée.</p>
+        </div>
+        </div>";
         $resultat->closeCursor( );
 }
 
