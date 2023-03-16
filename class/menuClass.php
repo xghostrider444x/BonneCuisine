@@ -47,6 +47,13 @@ class Menu{
         return $this->prix;
     }
 
+    private function lastInsertId($conn,$lang){
+        $requete = $conn->prepare("SELECT idMenu from menu_".$lang." where nom = :nom");
+        $requete->execute(array('nom'=>$this->nom));
+        $id = $requete->fetch();
+        return $id["idMenu"];
+    }
+
     public function ajouterMenu($conn,$lang){
         $data = [
             'nom' => $this->nom,
@@ -55,12 +62,8 @@ class Menu{
         ];
         $requete = $conn->prepare("INSERT into menu_".$lang."(nom,description,prix) values(:nom,:description,:prix)");
         $requete->execute($data);
-        
         //Cette partie de code récupère le id qui a été attribuer au menu précédament créer;
-        $requete = $conn->prepare("SELECT idMenu from menu_".$lang." where nom = :nom");
-        $requete->execute(array('nom'=>$this->nom));
-        $id = $requete->fetch();
-        $this->setIdMenu((int)$id["idMenu"]);
+        $this->lastInsertId($conn,$lang);
 
         if($this->ajouterImage()){
             return true;
@@ -132,6 +135,11 @@ class Menu{
     
     private function modifierImage(){
         $verif = true;
+
+        if ($_FILES['img']['error'] == UPLOAD_ERR_NO_FILE) {
+            return false;
+        }
+
         if($_FILES['img']['size'] < 52428800){
             if($this->supprimerImage()){
                 $verif = $this->ajouterImage();
