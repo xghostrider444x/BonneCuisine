@@ -1,11 +1,8 @@
 <?php
 session_start();
-    include("include/head.inc.php");
     include("librairie/fonction.lib.php");
     $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
-
     $lang = "fr";
-
     if(isset($_GET["lang"])){
         if($_GET["lang"] == "fr"){
             $lang = "fr";
@@ -14,7 +11,10 @@ session_start();
             $lang = "en";
         }
     }
-
+    $file_contents = file_get_contents("lang/".$lang.".json");
+    $data = json_decode($file_contents,true);
+    include("include/head.inc.php");
+    
     if(isset($_COOKIE['lang'])){
         setcookie("lang", $lang, time()+365*24*60*60);
     }
