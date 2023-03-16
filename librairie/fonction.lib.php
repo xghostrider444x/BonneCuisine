@@ -177,7 +177,10 @@ function afficherMessageAucuneCommande(){
 }
 
 // Cette fonction affiche le menu des élément pouvant être commander. 
-function afficherMenu($conn,$lang,$format){
+function afficherMenu($conn,$lang,$format,$devise){
+    $usd = $devise['data']['USD']['value'];
+    $cad = $devise['data']['CAD']['value'];
+
     $requete = "SELECT * from menu_".$lang.";";
         $resultat = $conn->query($requete);
         $resultat->setFetchMode(PDO::FETCH_OBJ);
@@ -192,7 +195,7 @@ function afficherMenu($conn,$lang,$format){
                     <ul style='list-style-type: none;'>
                         <li><b>Nom : </b>".$ligne->nom."</li>
                         <li><b>Description : </b>".$ligne->description."</li>
-                        <li><b>Prix : </b>".$ligne->prix." $ $format </li>
+                        <li><b>Prix : </b>".$ligne->prix." $ $format (".(number_format(($ligne->prix * $usd) /$cad,2))." USD) </li>
                     </ul>
                 </div>
                 <div class='col'>
