@@ -36,8 +36,8 @@ if(isset($_GET["action"])){
         <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">Nom</label>
         <div class="col-sm-10">
-        <input required type="text" class="form-control" id="staticEmail" name="nom_fr" placeholder="nom français">
-        <input required type="text" class="form-control" id="staticEmail" name="nom_en" placeholder="nom englais">
+        <input required type="text" class="form-control" id="staticEmail" name="nom_fr" placeholder="nom français" maxlength="50">
+        <input required type="text" class="form-control" id="staticEmail" name="nom_en" placeholder="nom englais" maxlength="50">
         </div>
     </div>
     <br>
@@ -52,7 +52,7 @@ if(isset($_GET["action"])){
     <div class="form-group row">
         <label for="prix" class="col-sm-2 col-form-label">prix</label>
         <div class="col-sm-10">
-        <input required type="text" class="form-control" id="prix" name="prix" placeholder="Prix">
+        <input required type="number" min="0" class="form-control" id="prix" name="prix" placeholder="Prix">
         </div>
     </div>
     <br>
