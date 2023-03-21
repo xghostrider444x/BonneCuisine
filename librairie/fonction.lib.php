@@ -167,11 +167,11 @@ function afficherElementPanier($conn,$panier){
 }
 
 // Cette fonction affiche un message si aucune commande n'est dans le panier.
-function afficherMessageAucuneCommande(){
+function afficherMessageAucuneCommande($msg){
     echo 
     "<div class='container text-center'>
         <div id='menu' class='fixed-center;'>
-        <p style='font-size: 30px'>Vous n'avez aucune commande dans votre panier</p>
+        <p style='font-size: 30px'>$msg</p>
         </div>
     </div>";
 }
@@ -205,12 +205,6 @@ function afficherMenu($conn,$lang,$format,$devise){
         </div>
         "; 
         }
-        echo "
-        <div class='container text-center'>
-        <div class='pinkie'>
-        <p>P.S. Le montant en devise <b>USD</b> est a titre indicatif. Ce dernier sera calculer au taux du jour lorsque la commande sera effectué et validée.</p>
-        </div>
-        </div>";
         $resultat->closeCursor( );
 }
 
