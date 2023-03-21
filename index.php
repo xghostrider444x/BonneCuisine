@@ -6,24 +6,27 @@ if(isset($_GET["action"])){
         session_destroy();    
     }
 }
-$lang = "fr";
+
 if(isset($_GET["lang"])){
     if($_GET["lang"] == "fr"){
         $lang = "fr";
+        setcookie("lang", $lang, time()+365*24*60*60);
     }
     elseif($_GET["lang"] == "en"){
         $lang = "en";
+        setcookie("lang", $lang, time()+365*24*60*60);
     }
 }
-if(isset($_COOKIE['lang'])){ 
+elseif(isset($_COOKIE['lang'])){
+    $lang = $_COOKIE["lang"];
     setcookie("lang", $lang, time()+365*24*60*60);
 }
 else{
+    $lang = "fr";
     setcookie("lang", $lang, time()+365*24*60*60);
 }
 
 $file_contents = file_get_contents('lang/'.$lang.'.json');
-
 $data = json_decode($file_contents,true);
 
 if(isset($_SESSION["usager"])){
