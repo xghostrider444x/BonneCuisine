@@ -7,6 +7,12 @@
     "index-presentation-1":"Bonjour grand amateur de cuisine",
     "index-presentation-2":"Bienvenue sur notre site web de cuisine en ligne ! Nous proposons une large sélection de délicieuses recettes ainsi qu'un équipement de cuisine de haute qualité. Grâce à notre interface conviviale, vous pouvez facilement passer des commandes et acheter tous les ingrédients et outils nécessaires pour réaliser vos plats préférés. Que vous soyez débutant ou chef expérimenté, notre site web est la destination idéale pour toutes vos envies culinaires.",
 
-    "type-argent":"CAD"
+    "nos-menu":"Nos Menu",
+    "type-argent":"CAD",
+    "msg-usd":"P.S. Le montant en devise USD est a titre indicatif. Ce dernier sera calculer au taux du jour lorsque la commande sera effectué et validée.",
+
+    "update-panier":"Mettre a jour le panier",
+    "livraison-panier":"Livraison",
+    "msg-aucunne-commande-panier":"Vous n'avez aucunne commande dans votre panier"
 
 }

@@ -2,11 +2,17 @@
     "menu":"Menu",
     "commande":"create a command",
     "rejoindre":"join us",
-    "panier":"Cart",
+    "panier":"Basket",
 
     "index-presentation-1":"Welcom great food anthusiast",
     "index-presentation-2":"Welcome to our online cooking website! We offer a wide range of delicious recipes and high-quality kitchen equipment. With our user-friendly interface, you can easily place orders and purchase all the necessary ingredients and tools to create your favorite meals. Whether you are a beginner or a seasoned chef, our website is the perfect destination for all your cooking needs.",
 
-    "type-argent":"US"
+    "nos-menu":"Our Menu",
+    "type-argent":"US",
+    "msg-usd":"P.S. The price in USD is only for indication. It will be calculeted when your purchase will be validated.",
+
+    "update-panier":"Update basket",
+    "livraison-panier":"delivery",
+    "msg-aucunne-commande-panier":"There is no article in your basket"
 
 }
