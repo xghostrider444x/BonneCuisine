@@ -40,9 +40,16 @@ if(isset($_SESSION["usager"])){
 else{
     include("librairie/fonction.lib.php");
    include("include/head.inc.php");
-   echo "<h2 class='titreMenu text-center'>Nos Menu</h2>";
+   echo "<h2 class='titreMenu text-center'>".$data['nos-menu']."</h2>";
    afficherMenu($conn,$lang,$data["type-argent"],$exchangeRates);
 }
+
+echo "
+        <div class='container text-center'>
+        <div class='pinkie'>
+        <p>".$data['msg-usd']."</p>
+        </div>
+        </div>";
 ?>
    <br><br>
 <?php
