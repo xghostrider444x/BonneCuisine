@@ -74,7 +74,7 @@ session_start();
         afficherElementPanier($conn,$panier);
     }
     else{
-        afficherMessageAucuneCommande();
+        afficherMessageAucuneCommande($data["msg-aucunne-commande-panier"]);
     }
 ?>
  
@@ -87,10 +87,10 @@ session_start();
     <form name='panier' method='post' action='panier.php?action=modifier'>
         <br><div class='container'>
         <div>
-            <input type='submit' value='mettre à jour la commande'/>
+            <input type='submit' value='".$data['update-panier']."'/>
         </div>
         <div>
-            <input type='checkbox' id='chk' ".$checked."> <label> 15$ Livraison</label>
+            <input type='checkbox' id='chk' ".$checked."> <label> 15$ ".$data['livraison-panier']."</label>
         </div>
     </form>";
     
