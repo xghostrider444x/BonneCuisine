@@ -22,8 +22,6 @@ if(isset($_GET["action"])){
             $newMenu->supprimerMenu($conn);
             afficherMessageAvecCSS("Le fichier Image donner dépasse la limit de 5Mb\n\r Le Menu n'a pas été créée.");
         }
-
-
     }
 }
 
@@ -58,9 +56,12 @@ if(isset($_GET["action"])){
     <br>
     <div class="form-group row">
         <label for="img" class="col-sm-2 col-form-label">Image</label>
-        <div class="col-sm-10">
-        <input required type="file" class="form-control" id="img" name="img" accept="image/png, image/jpeg">
-        </div>
+        <div id="drop_file_zone">
+		<div class="text-center">
+			<p>Glisser et déposer ici</p>
+			<p>ou</p>
+			<p><input type='file' name='img' accept='image/png, image/jpeg'></p>
+		</div>
     </div>
 
     <br>
@@ -72,6 +73,32 @@ if(isset($_GET["action"])){
 </div>
     </form>
 </div>
+<script type="text/javascript">
+const dropZone = document.getElementById('drop_file_zone');
+const fileInput = document.getElementsByName('img')[0];
+
+// Empêcher le comportement par défaut de la zone de dépôt
+dropZone.addEventListener('dragover', function(e) {
+  e.preventDefault();
+});
+
+// Récupérer le fichier déposé et le sélectionner dans l'input file
+dropZone.addEventListener('drop', function(e) {
+  e.preventDefault();
+
+  // Récupérer le fichier déposé
+  const file = e.dataTransfer.files[0];
+
+  // Vérifier si le fichier est valide (par exemple, vérifier le type MIME ou l'extension)
+  if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+    alert('Le fichier doit être au format JPEG ou PNG.');
+    return;
+  }
+
+  // Remplir l'input file avec le fichier sélectionné
+  fileInput.files = e.dataTransfer.files;
+});
+</script>
 <?php
 include("include/footAdmin.inc.php");
 ?>

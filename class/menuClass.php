@@ -48,10 +48,11 @@ class Menu{
     }
 
     private function lastInsertId($conn,$lang){
-        $requete = $conn->prepare("SELECT idMenu from menu_".$lang." where nom = :nom");
-        $requete->execute(array('nom'=>$this->nom));
-        $id = $requete->fetch();
-        return $id["idMenu"];
+    $query = "SELECT IdMenu FROM menu_" . $lang . " ORDER BY IdMenu DESC LIMIT 1";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result['IdMenu'];
     }
 
     public function ajouterMenu($conn,$lang){
@@ -63,7 +64,7 @@ class Menu{
         $requete = $conn->prepare("INSERT into menu_".$lang."(nom,description,prix) values(:nom,:description,:prix)");
         $requete->execute($data);
         //Cette partie de code récupère le id qui a été attribuer au menu précédament créer;
-        $this->lastInsertId($conn,$lang);
+        $this->setIdMenu($this->lastInsertId($conn,$lang));
 
         if($this->ajouterImage()){
             return true;
@@ -77,9 +78,9 @@ class Menu{
             'nom' => $this->nom,
             'description' => $this->description,
             'prix' => $this->prix,
-            'id' => $this->idMenu,
+            'id' => $this->idMenu
         ];
-        $requete = $conn->prepare("UPDATE :table set nom=:nom,description=:description,prix=:prix where idMenu=:id");
+        $requete = $conn->prepare("UPDATE :table set nom=:nom, description=:description, prix=:prix where idMenu=:id");
         $requete->execute($data);
 
         if($this->modifierImage()){

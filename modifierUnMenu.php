@@ -12,7 +12,7 @@ if(isset($_GET["lang"])){
     if($_GET["lang"]=="fr"){
         $lang = "fr";
     }
-    if($_GET["lang"] == "en"){
+    if($_GET["lang"]=="en"){
         $lang = "en";
     }
 }
@@ -35,7 +35,6 @@ if(isset($_GET['id'])){
         }
 
     }
-
     $requete = "SELECT * from menu_$lang where idMenu = ".$_GET['id']."";
     $resultat = $conn->query($requete);
     $resultat->setFetchMode(PDO::FETCH_OBJ);
@@ -51,7 +50,7 @@ echo "
         <div ><span class='text-right'><a href='?lang=fr&id=$ligne->idMenu'>Français </a>/ <a href='?lang=en&id=$ligne->idMenu'>English</a></span></div>
         </div>
         <div class='col'>
-            <form method='post' action='modifierUnMenu.php?action=modifier&id=$ligne->idMenu' enctype='multipart/form-data'>
+            <form method='post' action='modifierUnMenu.php?action=modifier&id=$ligne->idMenu&lang=$lang' enctype='multipart/form-data'>
                     <div class='container'>
                         <h3 class='text-center'>Modifier Caractéristique du menu</h3>
                         <div class='form-group row'>
@@ -72,10 +71,14 @@ echo "
                         <input type='text' class='form-control' id='inputPassword' name='prix' value='$ligne->prix'>
                         </div>
                     </div>
+                    <br>
                     <div class='form-group row'>
                         <label for='inputPassword' class='col-sm-2 col-form-label'>Image</label>
-                        <div class='col-sm-10'>
-                        <input type='file' class='form-control' name='img' accept='image/png, image/jpeg'>
+                        <div id='drop_file_zone'>
+                        <div class='text-center'>
+                            <p>Glisser et déposer ici</p>
+                            <p>ou</p>
+                            <p><input type='file' name='img' accept='image/png, image/jpeg'></p>
                         </div>
                     </div>
 
@@ -90,7 +93,32 @@ echo "
     </div>
 </div>";
 ?>     
-    
+<script type="text/javascript">
+const dropZone = document.getElementById('drop_file_zone');
+const fileInput = document.getElementsByName('img')[0];
+
+// Empêcher le comportement par défaut de la zone de dépôt
+dropZone.addEventListener('dragover', function(e) {
+  e.preventDefault();
+});
+
+// Récupérer le fichier déposé et le sélectionner dans l'input file
+dropZone.addEventListener('drop', function(e) {
+  e.preventDefault();
+
+  // Récupérer le fichier déposé
+  const file = e.dataTransfer.files[0];
+
+  // Vérifier si le fichier est valide (par exemple, vérifier le type MIME ou l'extension)
+  if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+    alert('Le fichier doit être au format JPEG ou PNG.');
+    return;
+  }
+
+  // Remplir l'input file avec le fichier sélectionné
+  fileInput.files = e.dataTransfer.files;
+});
+</script> 
 <?php
 include("include/footAdmin.inc.php");
 ?>
