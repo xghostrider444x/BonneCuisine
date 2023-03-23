@@ -73,8 +73,9 @@ class Menu{
     }
 
     public function modifierMenu($conn,$lang){
+        $tablename ="menu_".$lang;
         $data = [
-            'table' => "menu_".$lang,
+            'table' => $tablename,
             'nom' => $this->nom,
             'description' => $this->description,
             'prix' => $this->prix,
