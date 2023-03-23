@@ -73,15 +73,14 @@ class Menu{
     }
 
     public function modifierMenu($conn,$lang){
-        $tablename ="menu_".$lang;
+        $tablename ="menu_".$lang."";
         $data = [
-            'table' => $tablename,
             'nom' => $this->nom,
             'description' => $this->description,
             'prix' => $this->prix,
             'id' => $this->idMenu
         ];
-        $requete = $conn->prepare("UPDATE :table set nom=:nom, description=:description, prix=:prix where idMenu=:id");
+        $requete = $conn->prepare("UPDATE $tablename set nom=:nom, description=:description, prix=:prix where idMenu=:id");
         $requete->execute($data);
 
         if($this->modifierImage()){
