@@ -15,7 +15,7 @@ if(isset($_GET["action"])){
         $verif = true;
         $newMenuFr = new Menu($_POST["nom_fr"],$_POST["description_fr"],$_POST["prix"]);
         $newMenuEn = new Menu($_POST["nom_en"],$_POST["description_en"],$_POST["prix"]);
-        if($newMenuFr->ajouterMenu($conn,"fr")&&$newMenuEn->ajouterMenu($conn,"en")){
+        if($newMenuFr->ajouterMenu($conn,"fr") && $newMenuEn->ajouterMenu($conn,"en")){
             afficherMessageAvecCSS("Le menu a bien été ajouté");
         }
         else{
