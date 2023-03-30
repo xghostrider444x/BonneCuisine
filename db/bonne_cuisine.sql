@@ -38,22 +38,6 @@ create table if not exists panier (
     datePanier  DATETIME,
     PRIMARY KEY (idPanier,noProduit)
 );
-drop table if exists menu_fr;
-create table if not exists menu_fr (
-    idMenu          smallint AUTO_INCREMENT,
-    nom             varchar(45),
-    description     varchar(250),
-    prix            float,
-    FOREIGN KEY (idMenu) REFERENCES panier(noProduit) on UPDATE CASCADE on delete cascade
-);
-drop table if exists menu_en;
-create table if not exists menu_en (
-    idMenu  smallint AUTO_INCREMENT,
-    nom     varchar(45),
-    description     varchar(250),
-    prix    float,
-    FOREIGN KEY (idMenu) REFERENCES panier(noProduit) on UPDATE CASCADE on delete cascade
-);
 
 create table if not exists devise (
     idDevise    SMALLINT    not null    primary Key,
