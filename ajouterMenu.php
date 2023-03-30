@@ -42,8 +42,8 @@ if(isset($_GET["action"])){
     <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label">description</label>
         <div class="col-sm-10">
-            <input required type="text" class="form-control" id="description" name="description_fr" placeholder="description français">
-            <input required type="text" class="form-control" id="description" name="description_en" placeholder="description anglais">
+            <input required type="text" class="form-control" id="description" name="description_fr" placeholder="description français" maxlength="250">
+            <input required type="text" class="form-control" id="description" name="description_en" placeholder="description anglais" maxlength="250">
         </div>
     </div>
     <br>

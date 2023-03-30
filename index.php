@@ -29,11 +29,12 @@ $file_contents = file_get_contents('lang/'.$lang.'.json');
 $data = json_decode($file_contents,true);
 
 if(isset($_SESSION["usager"])){
-        include("include/headAdmin.inc.php");
-    }
-    else{
-       include("include/head.inc.php");
-    }
+    include("include/headAdmin.inc.php");
+}
+else{
+   include "include/head.inc.php"; 
+
+}
 
 ?>
 <div class="container">

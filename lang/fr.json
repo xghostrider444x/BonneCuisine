@@ -13,6 +13,10 @@
 
     "update-panier":"Mettre a jour le panier",
     "livraison-panier":"Livraison",
-    "msg-aucunne-commande-panier":"Vous n'avez aucunne commande dans votre panier"
+    "msg-aucunne-commande-panier":"Vous n'avez aucunne commande dans votre panier",
+
+    "connexion":"Connexion",
+    "deconnexion":"Déconnexion",
+    "prix":"Prix"
 
 }

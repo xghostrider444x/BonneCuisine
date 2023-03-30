@@ -1,6 +1,6 @@
 <?php 
 include("librairie/fonction.lib.php");
-$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','jessy_root','infoMac420');
 session_start();
 $lang = "fr";
 $file_contents = file_get_contents('lang/'.$lang.'.json');
@@ -45,13 +45,13 @@ if(isset($_GET["action"])){
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticEmail" name="email" placeholder="Email@gmail.com">
+            <input type="email" class="form-control" id="staticEmail" name="email" placeholder="Email@gmail.com" Max="50">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" name="mp" placeholder="Password">
+            <input type="password" class="form-control" id="inputPassword" name="mp" placeholder="Password" Max="50">
             </div>
         </div>
         <br>

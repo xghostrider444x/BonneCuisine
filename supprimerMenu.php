@@ -55,3 +55,6 @@ if(isset($_GET["action"])){
     </div>
 </form>
 </div>
+<?php 
+include("Include/footAdmin.inc.php");
+?>

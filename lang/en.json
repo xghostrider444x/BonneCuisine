@@ -13,6 +13,10 @@
 
     "update-panier":"Update basket",
     "livraison-panier":"delivery",
-    "msg-aucunne-commande-panier":"There is no article in your basket"
+    "msg-aucunne-commande-panier":"There is no article in your basket",
+
+    "connexion":"Loggin",
+    "deconnexion":"Disconnect",
+    "prix":"Price"
 
 }
