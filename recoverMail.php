@@ -1,6 +1,7 @@
 <?php 
 include("librairie/fonction.lib.php");
-$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+$conn;
+connexion($conn);
 $milliseconds = floor(microtime(true) * 1000);
 if (isset($_GET["action"])){
     if($_GET["action"] == "sendRecoverEmail"){

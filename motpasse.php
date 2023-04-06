@@ -1,7 +1,8 @@
 <?php
 include("librairie/fonction.lib.php");
     include("include/head.inc.php");
-    $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+    $conn;
+    connexion($conn);
     if(isset($_GET['action'])){
         if($_GET['action'] == 'resetPassword'){
             if($_POST['newMP'] == $_POST['newMPC']){

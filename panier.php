@@ -1,7 +1,8 @@
 <?php
 session_start();
     include("librairie/fonction.lib.php");
-    $conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+    $conn;
+    connexion($conn);
    
     if(isset($_GET["lang"])){
         if($_GET["lang"] == "fr"){
@@ -24,6 +25,7 @@ session_start();
     
     $file_contents = file_get_contents("lang/".$lang.".json");
     $data = json_decode($file_contents,true);
+    
     include("include/head.inc.php");
     
     

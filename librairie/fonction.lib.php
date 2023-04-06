@@ -1,8 +1,14 @@
 <?php 
 
-function connection($bd){
-    $bd = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
-    return $bd;
+function connexion(&$conn){
+    try{
+        $conn = new PDO('mysql:host=localhost; dbname=jessy_Bonne_Cuisine; charset=utf8','jessy_root','infoMac420');
+        $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+    catch(Exception $e){
+        echo "Échec lors de la connexion à Mysql : ".$e->getMessage();
+    }
 }
 // Cette fonction vérifie si le courriel et le mot de passe de l'usager est valide (Retourne un Boolean)
 function verifUsager($conn,$courriel,$mp){

@@ -1,6 +1,7 @@
 <?php 
 include("librairie/fonction.lib.php");
-$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','jessy_root','infoMac420');
+$conn;
+connexion($conn);
 session_start();
 $lang = "fr";
 $file_contents = file_get_contents('lang/'.$lang.'.json');

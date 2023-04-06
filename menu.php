@@ -1,6 +1,8 @@
 <?php
 session_start();
-$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+include("librairie/fonction.lib.php");
+$conn;
+connexion($conn);
 
 $key = "Delxwxim1EX2LrlUvOq8QScd4NyYe2ZTuLc56AvR";
 
@@ -41,7 +43,7 @@ if(isset($_SESSION["usager"])){
     afficherMenuAdmin($conn);
 }
 else{
-    include("librairie/fonction.lib.php");
+    
    include("include/head.inc.php");
    echo "<h2 class='titreMenu text-center'>".$data['nos-menu']."</h2>";
    afficherMenu($conn,$lang,$data["type-argent"],$exchangeRates);

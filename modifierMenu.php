@@ -9,7 +9,8 @@ else{
 }
 include("librairie/fonction.lib.php");
 include("class/menuClass.php");
-$conn = new PDO('mysql:host=localhost; dbname=Bonne_Cuisine; charset=utf8','root','infoMac420');
+$conn;
+connexion($conn);
 
 afficherModifierMenu($conn);
 echo "<br><br>";
