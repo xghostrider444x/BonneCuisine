@@ -77,7 +77,7 @@ function updatePanier($conn,$quantite,$id,$panier){
         supprimerItemPanier($conn,$id,$panier);
     }
     else{
-        $requete = "UPDATE Panier set quantite = $quantite where idPanier = '$panier' and noProduit = $id";
+        $requete = "UPDATE panier set quantite = $quantite where idPanier = '$panier' and noProduit = $id";
         $resultat = $conn->exec($requete);
     }
 }
